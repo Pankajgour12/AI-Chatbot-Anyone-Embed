@@ -4,6 +4,10 @@ import Image from "next/image"
 import logo from "@/assets/logo.png"
 
 export default function Navbar() {
+ const handleLogin=()=>{
+  window.location.href="/api/auth/login"
+ }
+
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0, filter: "blur(10px)" }}
@@ -49,6 +53,7 @@ export default function Navbar() {
             whileTap={{ scale: 0.95 }}
             className="relative px-6 py-2 rounded-md font-semibold
               text-white border border-white/30 overflow-hidden group"
+            onClick={handleLogin}
           >
            
             <span className="absolute inset-0 bg-white/10 opacity-0
