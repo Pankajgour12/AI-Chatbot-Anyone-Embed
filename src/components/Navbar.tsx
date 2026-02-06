@@ -2,11 +2,21 @@
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import logo from "@/assets/logo.png"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export default function Navbar({ email }: { email: string }) {
   const firstLetter = email?.charAt(0).toUpperCase()
   const [open, setOpen] = useState(false)
+  const popupRef= useRef<HTMLDivElement>(null)
+  useEffect(()=>{
+
+    const handler=()=>{
+
+    }
+    document.addEventListener("mousedown",handler)
+    return ()=>document.removeEventListener("mousedown",handler)
+
+  },[])
 
   const handleLogin = () => {
     window.location.href = "/api/auth/login"
@@ -21,7 +31,7 @@ export default function Navbar({ email }: { email: string }) {
     >
       <div className="relative backdrop-blur-xl bg-white/5 border-b border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.3)]">
 
-        {/* subtle moving light */}
+        
         <motion.div
           initial={{ x: "-100%" }}
           animate={{ x: "200%" }}
@@ -47,18 +57,18 @@ export default function Navbar({ email }: { email: string }) {
 
           {/* RIGHT SIDE */}
           {email ? (
-            <div className="relative">
-              {/* Avatar */}
+            <div className="relative" ref={popupRef}>
+              
               <motion.button
                 whileTap={{ scale: 0.92 }}
                 whileHover={{ scale: 1.08 }}
                 onClick={() => setOpen(!open)}
-                className="relative w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-pink-500 
+                className="relative w-10 h-10 rounded-full bg-gradient-to-br from-orange-500/50 to-pink-500/35 
                 text-white flex items-center justify-center font-bold shadow-lg"
               >
                 {firstLetter}
 
-                {/* pulse ring */}
+
                 <span className="absolute inset-0 rounded-full border border-orange-400/50 animate-ping opacity-40" />
               </motion.button>
 
@@ -91,10 +101,10 @@ export default function Navbar({ email }: { email: string }) {
               onClick={handleLogin}
               className="relative px-6 py-2 rounded-md font-semibold text-white overflow-hidden border border-white/20"
             >
-              {/* gradient bg */}
+              
               <span className="absolute inset-0 bg-gradient-to-r from-orange-500/40 to-pink-500/40 opacity-0 hover:opacity-100 transition duration-300" />
 
-              {/* shine */}
+              
               <span className="absolute top-0 left-[-120%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-12 hover:left-[150%] transition-all duration-700" />
 
               <span className="relative z-10">Login</span>
