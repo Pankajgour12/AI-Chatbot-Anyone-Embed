@@ -5,6 +5,8 @@ import logo from "@/assets/logo.png"
 
 export default function Navbar({email}:{email:string}) {
   
+  const firstLetter = email?.charAt(0).toUpperCase();
+  
 
  const handleLogin=()=>{
   window.location.href="/api/auth/login"
@@ -49,7 +51,14 @@ export default function Navbar({email}:{email:string}) {
             </p>
           </motion.div>
 
-            {email? <p>{email}</p>:  <motion.button
+            {email? <div className="">
+              <button className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-semibold hover:scale-105 transition ">
+                {firstLetter}
+              </button>
+
+            </div>
+            
+            :  <motion.button
             whileHover={{ scale: 1.08, y: -1 }}
             whileTap={{ scale: 0.95 }}
             className="relative px-6 py-2 rounded-md font-semibold
