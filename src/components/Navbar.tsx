@@ -3,7 +3,9 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import logo from "@/assets/logo.png"
 
-export default function Navbar() {
+export default function Navbar({email}:{email:string}) {
+  
+
  const handleLogin=()=>{
   window.location.href="/api/auth/login"
  }
@@ -47,8 +49,7 @@ export default function Navbar() {
             </p>
           </motion.div>
 
-        
-          <motion.button
+            {email? <p>{email}</p>:  <motion.button
             whileHover={{ scale: 1.08, y: -1 }}
             whileTap={{ scale: 0.95 }}
             className="relative px-6 py-2 rounded-md font-semibold
@@ -64,7 +65,8 @@ export default function Navbar() {
               skew-x-12 group-hover:left-[140%] transition-all duration-700" />
 
             <span className="relative z-10 tracking-wide">Login</span>
-          </motion.button>
+          </motion.button> }
+         
 
         </div>
 

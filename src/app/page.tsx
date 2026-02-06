@@ -3,10 +3,10 @@ import { getSession } from "@/lib/getSession";
 
 export default async function Home() {
  const session= await getSession();
- console.log(session)
+ console.log(session?.user?.email)
   return (
     <>
-    <HomeClient/>
+    <HomeClient email={session?.user?.email}/>
 
     </>
   );

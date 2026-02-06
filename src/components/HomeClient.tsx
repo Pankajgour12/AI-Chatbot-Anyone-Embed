@@ -4,10 +4,12 @@ import React from 'react'
 import Navbar from './Navbar'
 
 
-const HomeClient = () => {
+const HomeClient = ({email}:{email:string}) => {
+ 
+
   return (
     <div className='bg-zinc-500 min-h-screen'>
-    <Navbar/>
+    <Navbar email={email}/>
     
 
     </div>
