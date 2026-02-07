@@ -16,7 +16,7 @@ const HomeClient = ({ email }: { email: string }) => {
     },
     {
       title:"Admin Controlled",
-      description:"ake full control of your chatbot's knowledge base. Easily add, edit, or remove information to ensure your customers receive accurate and up-to-date answers."
+      description:"full control of your chatbot's knowledge base. Easily add, edit, or remove information to ensure your customers receive accurate and up-to-date answers."
     },
     {
       title:"Instant Customer Support",
@@ -49,107 +49,216 @@ const HomeClient = ({ email }: { email: string }) => {
       <div className="min-h-screen text-amber-50">
         <Navbar email={email} />
 
-        <section className="pt-36 pb-32 px-6">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-14 lg:gap-24 items-center">
-            
-            {/* LEFT */}
-            <motion.div
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-            >
-              <h1 className="text-4xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
-                AI Customer Support Chatbot <br />
-                <span className="text-gray-300 text-xl sm:text-2xl lg:text-3xl font-bold">
-                  Build for Modern Websites
-                </span>
-              </h1>
+      <section className="relative pt-40 pb-36 px-6 overflow-hidden">
+  
+  
+  <div className="absolute -top-24 left-1/3 w-[500px] h-[500px] bg-amber-500/5 blur-[180px] rounded-full" />
+  <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-orange-500/5 blur-[180px] rounded-full" />
 
-              <p className="text-gray-400 mt-6 text-base sm:text-lg max-w-xl">
-                Add a powerful AI Chatbot to your website in minutes, Let your
-                customers get instant answers using your own business knowledge.
-              </p>
+  <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-28 items-center relative z-10">
 
-              <div className="flex flex-wrap gap-4 mt-10">
-                {email ? (
-                  <button className="px-7 py-3 rounded-xl bg-gradient-to-br from-gray-600 to-amber-500/30 text-white font-semibold shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-md border border-white/10">
-                    Go to Dashboard
-                  </button>
-                ) : (
-                  <button 
-                    className="px-7 py-3 rounded-xl bg-gradient-to-br from-gray-600 to-amber-500/30 text-white font-semibold shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-md border border-white/10"
-                    onClick={handleLogin}
-                  >
-                    Get Started
-                  </button>
-                )}
+    {/* LEFT */}
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+    >
+     
+      <div className="inline-block px-4 py-1 mb-6 text-xs tracking-wider uppercase rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-gray-300">
+        AI Powered Support
+      </div>
 
-                <a href="#feature" className="px-7 py-3 rounded-xl border border-gray-600 text-white font-semibold hover:bg-gray-800 hover:scale-105 transition-all duration-300 backdrop-blur-md">
-                  Learn More
-                </a>
-              </div>
-            </motion.div>
+      
+      <motion.h2
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
+      >
+        AI Customer Support Chatbot <br />
+        <span className="bg-gradient-to-r from-amber-300 via-white to-orange-400 bg-clip-text text-transparent">
+          Built for Modern Websites
+        </span>
+      </motion.h2>
 
-           
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="rounded-3xl bg-white/90 backdrop-blur-xl shadow-[0_20px_80px_rgba(0,0,0,0.6)] border border-white/20 p-6 sm:p-8">
-                
-                <div className="bg-amber-100/80 rounded-lg px-4 py-2 text-sm text-zinc-800 mb-6 font-medium shadow">
-                  Live Chat Preview
-                </div>
+      
+      <p className="text-gray-400 mt-6 text-base sm:text-lg max-w-xl leading-relaxed">
+        Add a powerful AI Chatbot to your website in minutes. Let your
+        customers get instant answers using your own business knowledge.
+      </p>
 
-                <div className="flex flex-col gap-3">
-                  <div className="bg-zinc-800 rounded-xl px-4 py-2 text-sm text-white self-end w-fit shadow">
-                    Do you offer cash on delivery?
-                  </div>
+    
+      <div className="flex flex-wrap gap-4 mt-10">
+        {email ? (
+          <button className="px-7 py-3 rounded-xl bg-gradient-to-br from-gray-700 to-amber-500/20 text-white font-semibold shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-md border border-white/10">
+            Go to Dashboard
+          </button>
+        ) : (
+          <button
+            className="px-7 py-3 rounded-xl bg-gradient-to-br from-gray-700 to-amber-500/20 text-white font-semibold shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-md border border-white/10"
+            onClick={handleLogin}
+          >
+            Get Started
+          </button>
+        )}
 
-                  <div className="bg-zinc-200 rounded-xl px-4 py-2 text-sm self-start w-fit text-gray-700 shadow">
-                    Yes, we offer cash on delivery.
-                  </div>
-                </div>
-
-                <motion.div
-                  animate={{ y: [0, -12, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.6 }}
-                  className="absolute -bottom-7 -right-7 w-16 h-16 rounded-full bg-gradient-to-br from-gray-700 to-zinc-900 text-white flex items-center justify-center shadow-2xl text-xl border border-white/10"
-                >
-                  🗨️
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        <section
-        id="feature"
-        className=" py-28 px-6 bg-gradient-to-br from-black/20 to-zinc-900/10   border-t border-white/20 " 
+        <a
+          href="#feature"
+          className="px-7 py-3 rounded-xl border border-gray-600 text-white font-semibold hover:bg-gray-800 hover:scale-105 transition-all duration-300 backdrop-blur-md"
         >
-          <div className="max-w-6xl mx-auto">
+          Learn More
+        </a>
+      </div>
+    </motion.div>
 
-          <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0}}
-          viewport={{once:false}}
-          transition={{ duration: 0.7 }}
-          className="text-3xl sm:text-3xl lg:text-4xl font-semibold text-center"> 
-            Why Choose Our AI Chatbot?
-          </motion.h2>
-            
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10 " >
-            
+   
+   {/* RIGHT */}
+<motion.div
+  initial={{ opacity: 0, scale: 0.9, y: 40 }}
+  animate={{ opacity: 1, scale: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.2 }}
+  className="relative"
+>
+
+ 
+  <div className="absolute -inset-10 bg-amber-500/10 blur-[140px] rounded-full" />
+
+ 
+  <div className="relative p-[2px] rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-white/10 shadow-[0_30px_120px_rgba(0,0,0,0.8)]">
+
+    {/* MAIN CARD */}
+    <div className="relative rounded-3xl bg-white/95 backdrop-blur-2xl p-7 sm:p-9 overflow-hidden">
+
+      
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex gap-2">
+          <span className="w-3 h-3 bg-red-400 rounded-full" />
+          <span className="w-3 h-3 bg-yellow-400 rounded-full" />
+          <span className="w-3 h-3 bg-green-400 rounded-full" />
+        </div>
+
+        <div className="text-xs px-3 py-1 rounded-full bg-amber-100 text-amber-700 font-medium shadow">
+          AI Live
+        </div>
+      </div>
+
+      {/* CHAT AREA */}
+      <div className="flex flex-col gap-4">
+
+        <div className="bg-zinc-800 rounded-xl px-4 py-2 text-sm text-white self-end w-fit shadow">
+          Do you offer cash on delivery?
+        </div>
+
+        <div className="bg-zinc-200 rounded-xl px-4 py-2 text-sm text-gray-700 self-start w-fit shadow">
+          Yes, we offer cash on delivery.
+        </div>
+
+        
+        <div className="flex gap-1 self-start">
+          <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
+          <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:.15s]" />
+          <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:.3s]" />
+        </div>
+      </div>
+
+      {/* BOTTOM EDGE GLOW */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[3px] bg-gradient-to-r from-transparent via-amber-400 to-transparent blur-sm" />
+
+    </div>
+  </div>
+
+ 
+  <motion.div
+    animate={{ y: [0, -16, 0] }}
+    transition={{ repeat: Infinity, duration: 2 }}
+    className="absolute -bottom-10 -right-10 w-18 h-18 rounded-full bg-gradient-to-br from-zinc-800 to-black text-white flex items-center justify-center shadow-2xl text-2xl border border-white/10"
+  >
+    🗨️
+  </motion.div>
+</motion.div>
 
 
+  </div>
+</section>
 
-            </div>
 
-          </div>
+       
+        <section
+  id="feature"
+  className="
+  relative py-28 px-6
 
-        </section>
+  border-t border-white/10
+  overflow-hidden
+"
+>
+  {/* Ambient Background Lights */}
+  <div className="absolute top-24 left-1/3 w-96 h-96 bg-amber-500/5 blur-[160px] rounded-full" />
+  <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-orange-500/5 blur-[160px] rounded-full" />
+
+  <div className="max-w-7xl mx-auto relative z-10">
+
+    {/* UNIQUE TITLE */}
+    <motion.h2
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+      className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-center leading-tight"
+    >
+      
+      <span className="bg-gradient-to-r from-amber-300 via-white to-orange-400 bg-clip-text text-transparent">
+        Why Choose Our AI Chatbot?
+      </span>
+    </motion.h2>
+
+    <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
+
+      {features.map((feature, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.15, duration: 0.7 }}
+          className="
+          group relative rounded-3xl p-8
+          bg-white/5 backdrop-blur-xl
+          border border-white/10
+          shadow-[0_15px_60px_rgba(0,0,0,0.6)]
+          hover:-translate-y-3
+          hover:shadow-[0_25px_90px_rgba(0,0,0,0.8)]
+          transition-all duration-500
+          overflow-hidden
+        "
+        >
+          {/* BOTTOM ACCENT LINE */}
+          <div
+            className="
+            absolute bottom-0 left-1/2 -translate-x-1/2
+            w-0 h-[2px]
+            bg-gradient-to-r from-transparent via-amber-400 to-transparent
+            group-hover:w-3/4
+            transition-all duration-500
+          "
+          />
+
+          {/* SOFT INNER LIGHT */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-t from-amber-500/5 via-transparent to-transparent" />
+
+          {/* CONTENT */}
+          <h1 className="text-lg font-semibold text-white relative z-10">
+            {feature.title}
+          </h1>
+
+          <p className="mt-3 text-gray-400 text-sm leading-relaxed relative z-10">
+            {feature.description}
+          </p>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
 
 
 
