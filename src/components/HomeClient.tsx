@@ -130,19 +130,20 @@ const HomeClient = ({ email }: { email: string }) => {
     <div className="relative rounded-3xl bg-white/95 backdrop-blur-2xl p-7 sm:p-9 overflow-hidden">
 
       
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col  justify-between gap-2 mb-6">
+         <div className="text-sm px-1.5  rounded-md bg-amber-100 text-amber-700 font-medium shadow w-fit">
+          Live Chat Preview
+        </div>
         <div className="flex gap-2">
           <span className="w-3 h-3 bg-red-400 rounded-full" />
           <span className="w-3 h-3 bg-yellow-400 rounded-full" />
           <span className="w-3 h-3 bg-green-400 rounded-full" />
         </div>
 
-        <div className="text-xs px-3 py-1 rounded-full bg-amber-100 text-amber-700 font-medium shadow">
-          AI Live
-        </div>
+       
       </div>
 
-      {/* CHAT AREA */}
+     
       <div className="flex flex-col gap-4">
 
         <div className="bg-zinc-800 rounded-xl px-4 py-2 text-sm text-white self-end w-fit shadow">
@@ -161,7 +162,7 @@ const HomeClient = ({ email }: { email: string }) => {
         </div>
       </div>
 
-      {/* BOTTOM EDGE GLOW */}
+    
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[3px] bg-gradient-to-r from-transparent via-amber-400 to-transparent blur-sm" />
 
     </div>
@@ -171,10 +172,11 @@ const HomeClient = ({ email }: { email: string }) => {
   <motion.div
     animate={{ y: [0, -16, 0] }}
     transition={{ repeat: Infinity, duration: 2 }}
-    className="absolute -bottom-10 -right-10 w-18 h-18 rounded-full bg-gradient-to-br from-zinc-800 to-black text-white flex items-center justify-center shadow-2xl text-2xl border border-white/10"
+    className="absolute -bottom-10 -right-6 w-18 h-18 rounded-full bg-gradient-to-br from-zinc-800 to-black text-white flex items-center justify-center shadow-2xl text-2xl border border-white/10"
   >
     🗨️
   </motion.div>
+
 </motion.div>
 
 
