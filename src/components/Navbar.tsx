@@ -10,7 +10,10 @@ export default function Navbar({ email }: { email: string }) {
   const popupRef= useRef<HTMLDivElement>(null)
   useEffect(()=>{
 
-    const handler=()=>{
+    const handler=(e:MouseEvent)=>{
+      if(popupRef.current && !popupRef.current?.contains(e.target as Node))
+
+      setOpen(false)
 
     }
     document.addEventListener("mousedown",handler)
