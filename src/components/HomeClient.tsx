@@ -3,7 +3,13 @@
 import React from "react";
 import Navbar from "./Navbar";
 import { motion } from "motion/react";
-
+import {
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
+  FaInstagram,
+  FaWhatsapp,
+} from "react-icons/fa";
 const HomeClient = ({ email }: { email: string }) => {
   const handleLogin = () => {
     window.location.href = "/api/auth/login";
@@ -29,7 +35,8 @@ const HomeClient = ({ email }: { email: string }) => {
 
   return (
     <div className="min-h-screen w-full relative z-10 overflow-hidden">
-      <div className="absolute inset-0 -z-10"
+      <div
+        className="absolute inset-0 -z-10"
         style={{
           backgroundColor: "#0a0a0a",
           backgroundImage: `
@@ -226,7 +233,8 @@ const HomeClient = ({ email }: { email: string }) => {
         <section
           id="feature"
           className="relative py-28 px-6
-          border-t border-white/10 overflow-hidden">
+          border-t border-white/10 overflow-hidden"
+        >
           <div className="absolute top-24 left-1/3 w-96 h-96 bg-amber-500/5 blur-[160px] rounded-full" />
           <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-orange-500/5 blur-[160px] rounded-full" />
 
@@ -285,6 +293,137 @@ const HomeClient = ({ email }: { email: string }) => {
             </div>
           </div>
         </section>
+
+        
+        <section className="relative py-8 px-6 border-t border-white/5">
+          <div className="max-w-6xl mx-auto text-center">
+            <h2 className="text-4xl font-semibold text-white">How It Works</h2>
+
+            <div className="mt-20 grid md:grid-cols-3 gap-14">
+              {[
+                "Add your website data",
+                "Train the AI model",
+                "Go live instantly",
+              ].map((t, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.15 }}
+                  className="relative group"
+                >
+                  <div className="w-16 h-16 mx-auto rounded-full bg-amber-400/20 border border-amber-300/20 flex items-center justify-center text-2xl text-amber-300">
+                    {i + 1}
+                  </div>
+
+                  <h3 className="mt-6 text-lg text-white font-semibold">{t}</h3>
+
+                  <p className="text-gray-400 mt-2 text-sm">
+                    Simple 3 step setup. No complex coding required.
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+
+        <footer className="relative mt-40 border-t border-white/10">
+          <div
+            className="absolute inset-0 -z-10 opacity-40
+    bg-[radial-gradient(circle_at_top,#1f1f1f,transparent_70%)]"
+          />
+
+          <div className="max-w-7xl mx-auto px-6 py-20">
+            <div className="grid md:grid-cols-4 gap-14">
+              <div>
+                <h2 className="text-2xl font-semibold text-white">
+                  Support<span className="text-amber-400">AI</span>
+                </h2>
+
+                <p className="text-gray-400 mt-4 text-sm leading-relaxed max-w-xs">
+                  Intelligent AI chatbot platform for modern businesses.
+                  Automate support, increase conversions, and grow faster.
+                </p>
+
+                <a
+                  href="https://wa.me/919399098205?text=Hello%20Pankaj"
+                  target="_blank"
+                  className="inline-flex items-center gap-2 mt-6
+          text-green-400 hover:text-green-300 transition text-sm"
+                >
+                  <FaWhatsapp /> Quick Chat
+                </a>
+              </div>
+
+              <div className="hidden md:block">
+                <h4 className="text-white font-medium mb-4">Product</h4>
+                <ul className="space-y-3 text-gray-400 text-sm">
+                  <li className="hover:text-white cursor-pointer">Features</li>
+                  <li className="hover:text-white cursor-pointer">Pricing</li>
+                  <li className="hover:text-white cursor-pointer">Docs</li>
+                  <li className="hover:text-white cursor-pointer">API</li>
+                </ul>
+              </div>
+
+              <div className="hidden md:block">
+                <h4 className="text-white font-medium mb-4">Company</h4>
+                <ul className="space-y-3 text-gray-400 text-sm">
+                  <li className="hover:text-white cursor-pointer">About</li>
+                  <li className="hover:text-white cursor-pointer">Careers</li>
+                  <li className="hover:text-white cursor-pointer">Privacy</li>
+                  <li className="hover:text-white cursor-pointer">Terms</li>
+                </ul>
+              </div>
+
+              {/* CONNECT */}
+              <div>
+                <h4 className="text-white font-medium mb-4">Connect</h4>
+
+                <div className="flex gap-4 flex-wrap">
+                  {[
+                    { icon: FaGithub, link: "https://github.com/Pankajgour12" },
+                    {
+                      icon: FaLinkedin,
+                      link: "https://linkedin.com/in/pankajgour404",
+                    },
+                    { icon: FaTwitter, link: "https://x.com/Pankajgour404" },
+                    { icon: FaInstagram, link: "https://instagram.com/" },
+                  ].map((s, i) => (
+                    <a
+                      key={i}
+                      href={s.link}
+                      target="_blank"
+                      className="w-11 h-11 flex items-center justify-center
+              rounded-lg border border-white/10
+              text-gray-300 hover:text-amber-400
+              hover:border-amber-400/40
+              transition"
+                    >
+                      <s.icon />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="mt-20 pt-8 border-t border-white/10
+      flex flex-col md:flex-row items-center
+      justify-between gap-4 text-gray-500 text-sm"
+            >
+              <p>
+                © {new Date().getFullYear()} SupportAI. All rights reserved.
+              </p>
+
+              <p>
+                Built by{" "}
+                <span className="text-white font-medium">Pankaj Gour</span>
+              </p>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );
