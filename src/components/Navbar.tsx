@@ -5,6 +5,7 @@ import logo from "@/assets/logo.png"
 import { useEffect, useRef, useState } from "react"
 import axios from "axios"
 import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 export default function Navbar({ email }: { email: string }) {
   const firstLetter = email?.charAt(0).toUpperCase()
@@ -36,6 +37,8 @@ export default function Navbar({ email }: { email: string }) {
     toast.error("Logout Failed")
   }
 }
+
+const navigate = useRouter()
 
   return (
     <motion.nav
@@ -100,7 +103,9 @@ export default function Navbar({ email }: { email: string }) {
                       border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.6)]
                       overflow-hidden"
                   >
-                    <button className="px-5 py-3 w-full text-left text-sm text-white hover:bg-white/10 transition">
+                    <button className="px-5 py-3 w-full text-left text-sm text-white hover:bg-white/10 transition"
+                    onClick={()=>navigate.push("/dashboard")}
+                    >
                       Dashboard
                     </button>
 

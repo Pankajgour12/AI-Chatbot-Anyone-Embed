@@ -10,6 +10,7 @@ import {
   FaInstagram,
   FaWhatsapp,
 } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 const HomeClient = ({ email }: { email: string }) => {
   const handleLogin = () => {
     window.location.href = "/api/auth/login";
@@ -31,6 +32,8 @@ const HomeClient = ({ email }: { email: string }) => {
         "Provide your customers with instant answers to their queries, improving their experience and increasing satisfaction. Our AI chatbot is available 24/7 to assist your customers whenever they need.",
     },
   ];
+
+  const navigate = useRouter()
 
   return (
     <div className="min-h-screen w-full relative z-10 overflow-hidden">
@@ -97,6 +100,8 @@ const HomeClient = ({ email }: { email: string }) => {
       transition-all duration-300
       border border-white/10
     "
+      onClick={()=>navigate.push("/dashboard")}
+
                   >
                     <span
                       className="
