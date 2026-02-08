@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import logo from "@/assets/logo.png"
 import { useEffect, useRef, useState } from "react"
+import axios from "axios"
+import { toast } from "sonner"
 
 export default function Navbar({ email }: { email: string }) {
   const firstLetter = email?.charAt(0).toUpperCase()
@@ -18,9 +20,22 @@ export default function Navbar({ email }: { email: string }) {
     return () => document.removeEventListener("mousedown", handler)
   }, [])
 
-  const handleLogin = () => {
+  const handleLogin = async() => {
     window.location.href = "/api/auth/login"
+    
+     
   }
+
+ const handleLogOut = async () => {
+  try {
+    await axios.get("/api/auth/logout")
+    
+    window.location.href = "/"
+ 
+  } catch (error) {
+    toast.error("Logout Failed")
+  }
+}
 
   return (
     <motion.nav
@@ -89,7 +104,9 @@ export default function Navbar({ email }: { email: string }) {
                       Dashboard
                     </button>
 
-                    <button className="px-5 py-3 w-full text-left text-sm text-red-400 hover:bg-white/10 transition">
+                    <button className="px-5 py-3 w-full text-left text-sm text-red-400 hover:bg-white/10 transition"
+                    onClick={handleLogOut}
+                    >
                       Logout
                     </button>
                   </motion.div>

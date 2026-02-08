@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import { motion } from "motion/react";
 import {
@@ -14,7 +14,6 @@ const HomeClient = ({ email }: { email: string }) => {
   const handleLogin = () => {
     window.location.href = "/api/auth/login";
   };
-
   const features = [
     {
       title: "Easy Integration",
@@ -262,7 +261,7 @@ const HomeClient = ({ email }: { email: string }) => {
           bg-white/5 backdrop-blur-xl
           border border-white/10
           shadow-[0_15px_60px_rgba(0,0,0,0.6)]
-          hover:-translate-y-3
+         
           hover:shadow-[0_25px_90px_rgba(0,0,0,0.8)]
           transition-all duration-500
           overflow-hidden
@@ -326,6 +325,7 @@ const HomeClient = ({ email }: { email: string }) => {
             </div>
           </div>
         </section>
+
 
         {/* Footer */}
 
