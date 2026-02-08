@@ -88,27 +88,90 @@ const HomeClient = ({ email }: { email: string }) => {
       </p>
 
     
-      <div className="flex flex-wrap gap-4 mt-10">
-        {email ? (
-          <button className="px-7 py-3 rounded-xl bg-gradient-to-br from-gray-700 to-amber-500/20 text-white font-semibold shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-md border border-white/10">
-            Go to Dashboard
-          </button>
-        ) : (
-          <button
-            className="px-7 py-3 rounded-xl bg-gradient-to-br from-gray-700 to-amber-500/20 text-white font-semibold shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-md border border-white/10"
-            onClick={handleLogin}
-          >
-            Get Started
-          </button>
-        )}
+      
 
-        <a
-          href="#feature"
-          className="px-7 py-3 rounded-xl border border-gray-600 text-white font-semibold hover:bg-gray-800 hover:scale-105 transition-all duration-300 backdrop-blur-md"
-        >
-          Learn More
-        </a>
-      </div>
+      <div className="flex flex-wrap gap-5 mt-12">
+
+  {email ? (
+    <button className="
+      group relative px-8 py-3 rounded-xl
+      text-white font-semibold overflow-hidden
+      bg-gradient-to-br from-zinc-700 to-zinc-900
+      shadow-[0_10px_40px_rgba(0,0,0,0.6)]
+      hover:-translate-y-1 hover:shadow-[0_20px_70px_rgba(0,0,0,0.8)]
+      transition-all duration-300
+      border border-white/10
+    ">
+    
+      <span className="
+        absolute inset-0 opacity-0 group-hover:opacity-100
+        bg-gradient-to-r from-transparent via-white/20 to-transparent
+        transition duration-500
+      " />
+
+      
+      <span className="
+        absolute -inset-[2px] rounded-xl blur-md opacity-0
+        group-hover:opacity-100 transition duration-500
+        bg-gradient-to-r from-amber-400/30 to-orange-500/30
+      " />
+
+      <span className="relative z-10">Go to Dashboard</span>
+    </button>
+  ) : (
+    <button
+      onClick={handleLogin}
+      className="
+      group relative px-8 py-3 rounded-xl
+      text-white font-semibold overflow-hidden
+      bg-gradient-to-br from-zinc-700 to-zinc-900
+      shadow-[0_10px_40px_rgba(0,0,0,0.6)]
+      hover:-translate-y-1 hover:shadow-[0_20px_70px_rgba(0,0,0,0.8)]
+      transition-all duration-300
+      border border-white/10
+    ">
+      <span className="
+        absolute inset-0 opacity-0 group-hover:opacity-100
+        bg-gradient-to-r from-transparent via-white/20 to-transparent
+        transition duration-500
+      " />
+
+      <span className="
+        absolute -inset-[2px] rounded-xl blur-md opacity-0
+        group-hover:opacity-100 transition duration-500
+        bg-gradient-to-r from-amber-400/30 to-orange-500/30
+      " />
+
+      <span className="relative z-10">Get Started</span>
+    </button>
+  )}
+
+  {/* SECOND BUTTON */}
+  <a
+    href="#feature"
+    className="
+    group relative px-8 py-3 rounded-xl
+    font-semibold text-white overflow-hidden
+    border border-white/20
+    backdrop-blur-md
+    hover:-translate-y-1
+    hover:border-amber-400/40
+    transition-all duration-300
+  ">
+    
+    <span className="
+      absolute inset-0 opacity-0 group-hover:opacity-100
+      bg-gradient-to-tr from-transparent via-white/10 to-transparent
+      transition duration-500
+    " />
+
+    <span className="relative z-10">Learn More</span>
+  </a>
+
+</div>
+
+
+
     </motion.div>
 
    
@@ -194,13 +257,13 @@ const HomeClient = ({ email }: { email: string }) => {
   overflow-hidden
 "
 >
-  {/* Ambient Background Lights */}
+  
   <div className="absolute top-24 left-1/3 w-96 h-96 bg-amber-500/5 blur-[160px] rounded-full" />
   <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-orange-500/5 blur-[160px] rounded-full" />
 
   <div className="max-w-7xl mx-auto relative z-10">
 
-    {/* UNIQUE TITLE */}
+    
     <motion.h2
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -232,7 +295,7 @@ const HomeClient = ({ email }: { email: string }) => {
           overflow-hidden
         "
         >
-          {/* BOTTOM ACCENT LINE */}
+         
           <div
             className="
             absolute bottom-0 left-1/2 -translate-x-1/2
@@ -243,13 +306,15 @@ const HomeClient = ({ email }: { email: string }) => {
           "
           />
 
-          {/* SOFT INNER LIGHT */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-t from-amber-500/5 via-transparent to-transparent" />
+          
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-t from-amber-500/15 via-transparent to-transparent" />
 
-          {/* CONTENT */}
+        
           <h1 className="text-lg font-semibold text-white relative z-10">
             {feature.title}
           </h1>
+           <div className="w-16 h-[2px] mt-1 mb-4 bg-gradient-to-r from-amber-400/50 to-transparent" />
+
 
           <p className="mt-3 text-gray-400 text-sm leading-relaxed relative z-10">
             {feature.description}
@@ -257,6 +322,15 @@ const HomeClient = ({ email }: { email: string }) => {
         </motion.div>
       ))}
     </div>
+
+
+
+   
+
+
+  
+
+
   </div>
 </section>
 

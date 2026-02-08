@@ -51,11 +51,23 @@ export default function Navbar({ email }: { email: string }) {
           >
             <Image src={logo} alt="logo" height={36} />
 
-            <div className="absolute -inset-3 bg-orange-400/20 blur-2xl opacity-0 group-hover:opacity-100 transition duration-500" />
 
             <p className="text-lg font-semibold text-white tracking-wide group-hover:text-orange-400 transition">
               Support <span className="opacity-60">AI</span>
             </p>
+             <div
+            className="
+            absolute bottom-0 left-1/2 -translate-x-1/2
+            w-0 h-[2px]
+            bg-gradient-to-r from-transparent via-amber-400 to-transparent
+            group-hover:w-3/4
+            transition-all duration-500
+          "
+          />
+
+          
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-t from-amber-500/15 via-transparent to-transparent" />
+
           </motion.div>
 
           {/* RIGHT SIDE */}
