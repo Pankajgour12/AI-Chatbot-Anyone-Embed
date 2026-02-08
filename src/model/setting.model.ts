@@ -11,19 +11,20 @@ interface ISetting{
 const settingSchema = new Schema<ISetting>({
     ownerId:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     businessName:{
         type:String,
-        required:true
+        
     },
     supportEmail:{
         type:String,
-        required:true
+        
     },
     knowledge:{
         type:String,
-        required:true
+        
     }
 
 
@@ -32,6 +33,6 @@ const settingSchema = new Schema<ISetting>({
     {timestamps:true})
 
 
-   const Settings = mongoose.models.Settings || mongoose.model("Settings",settingSchema)
+   const Settings = mongoose.models.Settings || mongoose. ("Settings",settingSchema)
 
    export default Settings

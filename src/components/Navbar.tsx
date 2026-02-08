@@ -47,7 +47,7 @@ const navigate = useRouter()
       transition={{ duration: 0.6 }}
       className="fixed top-0 left-0 w-full z-50"
     >
-      <div className="relative backdrop-blur-2xl bg-black/30 border-b border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.45)]">
+      <div className="relative  backdrop-blur-2xl bg-black/30 border-b border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.45)]">
 
         
         <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[400px] h-[120px] bg-amber-500/10 blur-[120px] rounded-full" />
