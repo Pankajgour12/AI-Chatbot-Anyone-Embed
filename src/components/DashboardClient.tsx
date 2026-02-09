@@ -5,7 +5,6 @@ import logo from "@/assets/logo.png";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { set } from "mongoose";
 
 function DashboardClient({ ownerId }: { ownerId: string }) {
   const navigate = useRouter();
@@ -50,7 +49,7 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
           const result = await axios.post("/api/settings/get", {
             ownerId,
           });
-          // console.log(result.data);
+         console.log(result.data);
           setBusinessName(result.data.businessName);
           setSupportEmail(result.data.supportEmail);
           setKnowledge(result.data.knowledge);
@@ -66,7 +65,7 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
   },[ownerId]);
 
   return (
-    <div className="min-h-screen bg-neural text-amber-50">
+    <div className="min-h-screen app-bg text-amber-50">
       <motion.nav
         initial={{ y: -70, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -140,90 +139,189 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
         </div>
       </motion.nav>
 
-      <div className="flex justify-center px-4 py-14 mt-20 ">
-        <motion.div className="w-full max-w-3xl bg-zinc-500/10 backdrop-blur-2xl rounded-2xl shadow-xl p-10">
-          <div className="mb-10">
-            <h2 className="text-2xl text-white font-bold mb-4">
-              Welcome to your Dashboard
-            </h2>
-            <p className="text-green-600 mt-1">
-              Manage Your AI chatbot knowledge and busines details
-            </p>
-          </div>
+      <div className="relative flex justify-center px-4 py-24 mt-10">
 
-          <div className="mb-10">
-            <h2 className="text-lg mb-2">Business Details</h2>
-            <div className="space-y-4">
-              <input
-                type="text"
-                className="w-full rounded-xl border border-white px-4 py-3 text-sm 
-                    focus:outline-none focus:ring-2 focus:ring-white/50
-                    "
-                placeholder="Business Name"
-                onChange={(e) => setBusinessName(e.target.value)}
-                value={businessName}
-              />
+ 
+  <div className="absolute w-[500px] h-[300px] bg-amber-500/8 blur-[200px] rounded-full pointer-events-none" />
 
-              <input
-                type="text"
-                className="w-full rounded-xl border border-zinc-300 px-4 py-3 text-sm 
-                    focus:outline-none focus:ring-2 focus:ring-white/50
-                    "
-                placeholder="Support Email"
-                onChange={(e) => setSupportEmail(e.target.value)}
-                value={supportEmail}
-              />
-            </div>
-          </div>
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="
+      relative w-full max-w-4xl
+      bg-[#0b0b0d]
+      border border-white/10
+      rounded-2xl
+      shadow-[0_40px_140px_rgba(0,0,0,0.9)]
+      overflow-hidden
+    "
+  >
 
-          <div className="mb-10">
-            <h2 className="text-lg mb-2">Knowledge base</h2>
-            <p className="text-sm font-semibold mb-2">
-              Add FAQs,Policies,delivery info,refund ,etc.
-            </p>
-            <div className="space-y-4">
-              <textarea
-                className="w-full h-28  max-h-52 rounded-xl border border-white px-4 py-3 text-sm 
-                    focus:outline-none focus:ring-2 focus:ring-white/50
-                    "
-                placeholder={`   Example:
-    Refund Policy: 7 days return available
-    Delivery Time: 3-5 days delivery available
-    Contact: 123-456-7890
+    {/* TOP  */}
+    <div className="flex items-center justify-between px-8 py-5 border-b border-white/10 bg-black/70">
 
-
-
-                        `}
-                onChange={(e) => setKnowledge(e.target.value)}
-                value={knowledge}
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-5">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              disabled={loading}
-              onClick={handleSave}
-              className="px-7 py-3 rounded-xl bg-black text-white text-sm font-medium hover:bg-zinc-800 transition disabled:opacity-60 "
-            >
-              {loading ? "Saving..." : "Save"}
-            </motion.button>
-
-            {saved && (
-              <motion.span
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="text-green-500 font-medium"
-              >
-                Setting Saved...
-              </motion.span>
-            )}
-          </div>
-        </motion.div>
+      <div className="flex items-center gap-3">
+        <span className="w-3 h-3 bg-red-500 rounded-full" />
+        <span className="w-3 h-3 bg-yellow-400 rounded-full" />
+        <span className="w-3 h-3 bg-emerald-400 rounded-full" />
       </div>
+
+      <span className="text-[11px] font-mono tracking-[0.25em] text-gray-500">
+        SUPPORT_AI.CONSOLE
+      </span>
+
+      <span className="px-2 py-[2px] text-[10px]
+        border border-emerald-400/40
+        text-emerald-400 rounded
+        shadow-[0_0_12px_rgba(16,185,129,0.3)]">
+        ONLINE
+      </span>
+    </div>
+
+    
+    <div className="p-12 space-y-14">
+
+      {/* BUSINESS */}
+      <div>
+        <h3 className="
+          text-xs font-semibold tracking-[0.25em]
+          bg-gradient-to-r from-gray-400 to-gray-600
+          bg-clip-text text-transparent mb-6
+        ">
+          BUSINESS DETAILS
+        </h3>
+
+        <div className="space-y-6">
+          <input
+            type="text"
+            placeholder="Business Name"
+            value={businessName}
+            onChange={(e)=>setBusinessName(e.target.value)}
+            className="
+              w-full bg-[#111113]
+              border border-white/10
+              rounded-lg px-5 py-3
+              text-sm text-white
+              focus:border-amber-400/40
+              focus:ring-1 focus:ring-amber-400/30
+              outline-none
+              placeholder:text-gray-600
+            "
+          />
+
+          <input
+            type="text"
+            placeholder="Support Email"
+            value={supportEmail}
+            onChange={(e)=>setSupportEmail(e.target.value)}
+            className="
+              w-full bg-[#111113]
+              border border-white/10
+              rounded-lg px-5 py-3
+              text-sm text-white
+              focus:border-amber-400/40
+              focus:ring-1 focus:ring-amber-400/30
+              outline-none
+              placeholder:text-gray-600
+            "
+          />
+        </div>
+      </div>
+
+     
+      <div className="h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+
+      {/* KNOWLEDGE */}
+      <div>
+        <h3 className="
+          text-xs font-semibold tracking-[0.25em]
+          bg-gradient-to-r from-gray-400 to-gray-600
+          bg-clip-text text-transparent mb-6
+        ">
+          KNOWLEDGE BASE
+        </h3>
+
+        <textarea
+          value={knowledge}
+          onChange={(e)=>setKnowledge(e.target.value)}
+          placeholder="Refund Policy, Delivery Info..."
+          className="
+            w-full h-40 resize-none
+            bg-[#111113]
+            border border-white/10
+            rounded-lg px-5 py-4
+            text-sm text-white
+            focus:border-amber-400/40
+            focus:ring-1 focus:ring-amber-400/30
+            outline-none
+            placeholder:text-gray-600
+          "
+        />
+      </div>
+
+      {/* ACTION */}
+      <div className="flex items-center justify-between">
+
+        <motion.button
+  whileHover={{ y: -2 }}
+  whileTap={{ scale: 0.97 }}
+  disabled={loading}
+  onClick={handleSave}
+  className="
+    group relative px-9 py-3 rounded-xl
+    bg-white/[0.06] backdrop-blur-xl
+    border border-white/15
+    text-white font-semibold text-sm tracking-wide
+    shadow-[0_8px_30px_rgba(0,0,0,0.6)]
+    overflow-hidden
+    disabled:opacity-60
+  "
+>
+
+  {/* subtle inner light */}
+  <span
+    className="
+      absolute inset-0 opacity-0 group-hover:opacity-100
+      bg-gradient-to-b from-white/10 to-transparent
+      transition duration-400
+    "
+  />
+
+  {/* bottom accent line */}
+  <span
+    className="
+      absolute bottom-0 left-1/2 -translate-x-1/2
+      w-0 h-[2px]
+      bg-gradient-to-r from-transparent via-white/60 to-transparent
+      group-hover:w-3/4 transition-all duration-500
+    "
+  />
+
+  <span className="relative z-10">
+    {loading ? "Saving..." : "Apply Changes"}
+  </span>
+</motion.button>
+
+
+        {saved && (
+          <span className="text-emerald-400 text-xs tracking-wide font-mono">
+            ✓ CONFIG SAVED
+          </span>
+        )}
+
+      </div>
+    </div>
+
+   
+    <div className="absolute bottom-0 inset-x-0 h-[2px]
+      bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />
+
+  </motion.div>
+     </div>
+
+
+
     </div>
   );
 }

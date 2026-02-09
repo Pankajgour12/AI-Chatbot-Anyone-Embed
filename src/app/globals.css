@@ -1,54 +1,40 @@
 @import "tailwindcss";
 
-
 .app-bg {
   position: relative;
   min-height: 100vh;
   width: 100%;
-  background-color: #0a0a0a;
+  overflow-x: hidden;
+  background-color: #0a0a0f;
 
   background-image:
-    radial-gradient(circle at 25% 25%, #222222 0.5px, transparent 1px),
-    radial-gradient(circle at 75% 75%, #111111 0.5px, transparent 1px);
-
-  background-size: 10px 10px;
-  image-rendering: pixelated;
-  overflow-x: hidden;
+    radial-gradient(
+      900px 500px at 10% 10%,
+      rgba(255, 180, 80, 0.12),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 400px at 90% 20%,
+      rgba(120, 120, 255, 0.10),
+      transparent 60%
+    ),
+    radial-gradient(
+      800px 500px at 50% 90%,
+      rgba(255, 255, 255, 0.05),
+      transparent 70%
+    );
 }
 
-.app-bg::before {
+/* EDGE DEPTH */
+.app-bg::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at 50% 20%,
-    rgba(255, 170, 0, 0.08),
-    transparent 60%
-  );
   pointer-events: none;
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 60%,
+      rgba(0,0,0,0.65) 100%
+    );
 }
-
-.bg-neural {
-  position: relative;
-  min-height: 100vh;
-  background-color: #0b0b0c;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-  overflow-x: hidden;
-}
-
-.bg-neural::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 30% 20%,
-    rgba(255,170,0,0.08),
-    transparent 60%
-  );
-  pointer-events: none;
-}
-
-
