@@ -5,27 +5,41 @@ import logo from "@/assets/logo.png"
 import React, { useState } from 'react'
 import { useRouter } from "next/navigation"
 import axios from "axios"
+import { set } from "mongoose"
 
 function DashboardClient({ownerId}:{ownerId:string}) {
     const navigate = useRouter()
-    const [business , setBusiness] = useState("")
+    const [businessName , setBusinessName] = useState("")
     const [supportEmail, setSupportEmail] = useState("")
-    const [knowledgeBase, setKnowledgeBase] = useState("")
+    const [knowledge, setKnowledge] = useState("")
     const [loading, setLoading] = useState(false)
+    const [saved , setSaved]  = useState(false)
 
     const handleSave = async () => {
+      setLoading(true)
 try {
     const result = await axios.post("/api/settings",{
-ownerId,business,supportEmail,knowledgeBase
+ownerId,businessName,supportEmail,knowledge
 })
 console.log(result.data)
+setLoading(false)
+setSaved(true)
+setTimeout(() => {setSaved(false)},3000)
+
+setBusinessName("")
+setSupportEmail("")
+setKnowledge("")
+
 } catch (error) {
     console.log(error)
+    setLoading(false)
 
     
 }
 
     }
+
+    
 
   return (
     <div className='min-h-screen bg-neural text-amber-50'>
@@ -130,8 +144,8 @@ console.log(result.data)
                     <input type="text" className="w-full rounded-xl border border-white px-4 py-3 text-sm 
                     focus:outline-none focus:ring-2 focus:ring-white/50
                     " placeholder="Business Name"
-                    onChange={(e)=>setBusiness(e.target.value)}
-                    value={business}
+                    onChange={(e)=>setBusinessName(e.target.value)}
+                    value={businessName}
                     />
 
                      <input type="text" className="w-full rounded-xl border border-zinc-300 px-4 py-3 text-sm 
@@ -161,7 +175,7 @@ console.log(result.data)
 
                         `
                     }
-                    onChange={(e)=>setKnowledgeBase(e.target.value) } value={knowledgeBase}
+                    onChange={(e)=>setKnowledge(e.target.value) } value={knowledge}
                     />
 
                   
@@ -170,14 +184,32 @@ console.log(result.data)
             </div>
 
            <div className="flex items-center gap-5">
-              <motion.div
+              <motion.button
              
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              disabled={loading}
+              onClick={handleSave}
               className="px-7 py-3 rounded-xl bg-black text-white text-sm font-medium hover:bg-zinc-800 transition disabled:opacity-60 "
+              
               >
-                Save
-            </motion.div> 
+                {loading?"Saving...":"Save"}
+            
+                
+            </motion.button> 
+            
+            {saved && <motion.span
+            initial={{opacity:0,y:10}}
+            animate={{opacity:1,y:0}}
+            transition={{duration:0.5}}
+            className="text-green-500 font-medium"
+
+
+
+            
+            >
+              Setting Saved...
+            </motion.span>}
            </div>
 
 
