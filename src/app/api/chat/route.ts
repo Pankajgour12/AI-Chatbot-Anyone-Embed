@@ -1,9 +1,11 @@
+import connectDb from '@/lib/db';
 import Settings from '@/model/setting.model';
+import { GoogleGenAI } from '@google/genai';
 import { NextRequest, NextResponse } from 'next/server';
 
 
 
-export async function Post(req:NextRequest) {
+export async function POST(req:NextRequest) {
     try {
         const {message, ownerId} = await req.json();
         if(!message || !ownerId) {
@@ -12,7 +14,7 @@ export async function Post(req:NextRequest) {
             {status:400}
            )}
 
-
+ await connectDb()
     const setting = await Settings.findOne({ownerId});
      if(!setting){
         return NextResponse.json(
@@ -22,9 +24,9 @@ export async function Post(req:NextRequest) {
 
      } 
      
-     const knowledge =`business name-${setting.businessName} || not provided
-                       support email - ${setting.supportEmail} || not provided
-                       knowledge-      ${setting.knowledge} || not provided
+     const knowledge =`business name-${setting.businessName || "not provided" }
+                       support email - ${setting.supportEmail || "not provided" }
+                       knowledge-      ${setting.knowledge || "not provided" }
 }
      `
 
@@ -61,8 +63,18 @@ ASSISTANT ANSWER
 --------------------
      `
 
-    } catch (error) {
-        
+ const ai = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY})
+   const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: prompt,
+
+    })
+    return NextResponse.json(response.text)
+} catch(error) {
+    return NextResponse.json(
+            {message:`Chat Error ${error}`},
+            {status:500}
+    )
     }
     
 }
