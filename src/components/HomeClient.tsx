@@ -90,68 +90,78 @@ const HomeClient = ({ email }: { email: string }) => {
 
               <div className="flex flex-wrap gap-5 mt-12">
                 {email ? (
-                  <button
-                    className="
-      group relative px-8 py-3 rounded-xl
-      text-white font-semibold overflow-hidden
-      bg-gradient-to-br from-zinc-700 to-zinc-900
-      shadow-[0_10px_40px_rgba(0,0,0,0.6)]
-      hover:-translate-y-1 hover:shadow-[0_20px_70px_rgba(0,0,0,0.8)]
-      transition-all duration-300
-      border border-white/10
-    "
-      onClick={()=>navigate.push("/dashboard")}
+                 
+                  
+                  <motion.button
+                                whileHover={{ y: -2 }}
+                                whileTap={{ scale: 0.96 }}
+                                className="
+                      group relative px-7 py-2.5 rounded-xl
+                      bg-zinc-900/80 backdrop-blur-md
+                      border border-white/15
+                      text-white font-semibold tracking-wide
+                      shadow-[0_8px_30px_rgba(0,0,0,0.5)]
+                      overflow-hidden
+                    "
+                           onClick={()=>navigate.push("/dashboard")}   >
+                                {/* subtle light sweep */}
+                                <span
+                                  className="
+                        absolute inset-0 opacity-0 group-hover:opacity-100
+                        bg-gradient-to-r from-transparent via-white/10 to-transparent
+                        transition duration-500
+                      "
+                                />
+                  
+                                {/* bottom accent line */}
+                                <span
+                                  className="
+                        absolute bottom-0 left-1/2 -translate-x-1/2
+                        w-0 h-[2px]
+                        bg-gradient-to-r from-transparent via-amber-400 to-transparent
+                        group-hover:w-3/4 transition-all duration-500
+                      "
+                                />
+                  
+                                <span className="relative z-10">Go To Dashboard</span>
+                              </motion.button>
 
-                  >
-                    <span
-                      className="
-        absolute inset-0 opacity-0 group-hover:opacity-100
-        bg-gradient-to-r from-transparent via-white/20 to-transparent
-        transition duration-500
-      "
-                    />
-
-                    <span
-                      className="
-        absolute -inset-[2px] rounded-xl blur-md opacity-0
-        group-hover:opacity-100 transition duration-500
-        bg-gradient-to-r from-amber-400/30 to-orange-500/30
-      "
-                    />
-
-                    <span className="relative z-10">Go to Dashboard</span>
-                  </button>
                 ) : (
-                  <button
-                    onClick={handleLogin}
-                    className="
-      group relative px-8 py-3 rounded-xl
-      text-white font-semibold overflow-hidden
-      bg-gradient-to-br from-zinc-700 to-zinc-900
-      shadow-[0_10px_40px_rgba(0,0,0,0.6)]
-      hover:-translate-y-1 hover:shadow-[0_20px_70px_rgba(0,0,0,0.8)]
-      transition-all duration-300
-      border border-white/10
-    "
-                  >
-                    <span
-                      className="
-        absolute inset-0 opacity-0 group-hover:opacity-100
-        bg-gradient-to-r from-transparent via-white/20 to-transparent
-        transition duration-500
-      "
-                    />
-
-                    <span
-                      className="
-        absolute -inset-[2px] rounded-xl blur-md opacity-0
-        group-hover:opacity-100 transition duration-500
-        bg-gradient-to-r from-amber-400/30 to-orange-500/30
-      "
-                    />
-
-                    <span className="relative z-10">Get Started</span>
-                  </button>
+                   <motion.button
+                                whileHover={{ y: -2 }}
+                                whileTap={{ scale: 0.96 }}
+                                className="
+                      group relative px-7 py-2.5 rounded-xl
+                      bg-zinc-900/80 backdrop-blur-md
+                      border border-white/15
+                      text-white font-semibold tracking-wide
+                      shadow-[0_8px_30px_rgba(0,0,0,0.5)]
+                      overflow-hidden
+                    "
+                           onClick={handleLogin} >
+                               
+                                <span
+                                  className="
+                        absolute inset-0 opacity-0 group-hover:opacity-100
+                        bg-gradient-to-r from-transparent via-white/10 to-transparent
+                        transition duration-500
+                      "
+                                />
+                  
+                                
+                                <span
+                                  className="
+                        absolute bottom-0 left-1/2 -translate-x-1/2
+                        w-0 h-[2px]
+                        bg-gradient-to-r from-transparent via-amber-400 to-transparent
+                        group-hover:w-3/4 transition-all duration-500
+                      "
+                                />
+                  
+                                <span className="relative z-10">
+                                 Get Started..
+                                </span>
+                              </motion.button>
                 )}
 
                 {/* SECOND BUTTON */}

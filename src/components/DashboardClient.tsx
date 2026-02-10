@@ -109,7 +109,7 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
     overflow-hidden
   "
             >
-              {/* subtle light sweep */}
+              
               <span
                 className="
       absolute inset-0 opacity-0 group-hover:opacity-100
@@ -118,7 +118,7 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
     "
               />
 
-              {/* bottom accent line */}
+           
               <span
                 className="
       absolute bottom-0 left-1/2 -translate-x-1/2
