@@ -108,6 +108,7 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
     shadow-[0_8px_30px_rgba(0,0,0,0.5)]
     overflow-hidden
   "
+  onClick={()=>navigate.push('/embed')}
             >
               
               <span
