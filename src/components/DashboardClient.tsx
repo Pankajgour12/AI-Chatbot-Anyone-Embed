@@ -65,7 +65,7 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
   },[ownerId]);
 
   return (
-    <div className="min-h-screen app-bg text-amber-50">
+    <div className="min-h-screen nebula-bg text-amber-50">
       <motion.nav
         initial={{ y: -70, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

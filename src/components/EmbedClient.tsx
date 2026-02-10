@@ -8,8 +8,13 @@ import { useRouter } from 'next/navigation';
 
 const EmbedClient = ({ownerId}:{ownerId:string}) => {
     const navigate = useRouter()
+    const embedCode = `
+      <script src="http://localhost:3000/chatBot.js"
+    data-ownerId="usr_111261367314416396"
+    ></script>
+    `
   return (
-    <div className='min-h-screen nebula-bg'>
+    <div className='min-h-screen aura-bg'>
        <motion.nav
         initial={{ y: -70, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -83,6 +88,26 @@ const EmbedClient = ({ownerId}:{ownerId:string}) => {
           />
         </div>
       </motion.nav>
+
+      <div className='flex justify-center px-4 py-20'>
+        <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="
+          relative w-full max-w-4xl
+         text-white
+          rounded-2xl 
+          bg-black/70 p-10
+          shadow-[0_40px_140px_rgba(0,0,0,0.9)]
+          
+        "
+        >
+          <h1 className='text-2xl font-medium mb-2' >Embed ChatBot</h1>
+          <p>Copy and paste this code before <code>&lt;/body&gt;</code> </p>
+        </motion.div>
+
+      </div>
 
     </div>
   )
