@@ -1,216 +1,238 @@
+(function () {
+  const api_url = "http://localhost:3000/api/chat";
+  const scriptTag = document.currentScript;
+  const ownerId = scriptTag.getAttribute("data-ownerId");
+  if (!ownerId) return console.error("ownerId missing");
 
 
-(function(){
+  const button = document.createElement("div");
+  button.innerHTML = "💬";
 
-    const api_url = 'http://localhost:3000/api/chat'
-    const scriptTag = document.currentScript;
-     
-    const ownerId  = scriptTag.getAttribute('data-ownerId');
+  Object.assign(button.style, {
+    position: "fixed",
+    bottom: "22px",
+    right: "22px",
+    zIndex: "99999",
+    cursor: "pointer",
+    width: "64px",
+    height: "64px",
+    borderRadius: "50%",
+    background: "radial-gradient(circle at 30% 30%, #2c2c35, #050507 70%)",
+    color: "#fff",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: "24px",
+    boxShadow:
+      "0 20px 80px rgba(0,0,0,0.85), inset 0 0 12px rgba(255,255,255,0.06)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    transition: "all .25s ease",
+  });
 
-    if(!ownerId) {
-        console.error('ownerId is Not found');
-        return;
+  button.onmouseenter = () => {
+    button.style.transform = "translateY(-6px) scale(1.08)";
+  };
+  button.onmouseleave = () => {
+    button.style.transform = "translateY(0) scale(1)";
+  };
+
+  document.body.append(button);
+
+  /* ================= CHAT BOX ================= */
+
+  const box = document.createElement("div");
+
+  function responsive() {
+    const mobile = window.innerWidth < 520;
+
+    if (mobile) {
+      Object.assign(box.style, {
+        position: "fixed",
+        bottom: "16px",
+        right: "12px",
+        left: "12px",
+        width: "auto",
+        height: "70vh",
+        borderRadius: "22px",
+      });
+    } else {
+      Object.assign(box.style, {
+        position: "fixed",
+        bottom: "92px",
+        right: "22px",
+        left: "auto",
+        width: "390px",
+        height: "560px",
+        borderRadius: "26px",
+      });
     }
-
-    const button = document.createElement('div');
-button.innerHTML = "🗨️";
-
-Object.assign(button.style, {
-  position: 'fixed',
-  bottom: '24px',
-  right: '24px',
-  zIndex: '9999',
-  cursor: 'pointer',
-  fontSize: '24px',
-  width: '50px',
-  height: '50px',
-  borderRadius: '50%',
-  backgroundColor: '#007bff',
-  color: '#fff',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
-  transition: 'background-color 0.3s ease',
-});
-
-
-
-    document.body.append(button);
-
-  const box = document.createElement('div');
-
-Object.assign(box.style, {
-  position: 'fixed',
-  bottom: '90px',
-  right: '24px',
-  zIndex: '9999',
-  width: '320px',
-  height: '420px',
-  backgroundColor: '#ffffff',
-  borderRadius: '14px',
-  boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
-  display: 'none', // default hidden
-  flexDirection: 'column',
-  overflow: 'hidden',
-  fontFamily: 'Arial, sans-serif',
-  backdropFilter: 'blur(10px)',
-  border: '1px solid #e5e5e5',
-  animation: 'fadeIn 0.2s ease',
-});
-
-box.innerHTML = `
-  <div style="
-      background:#007bff;
-      color:white;
-      padding:12px;
-      font-weight:600;
-      font-size:16px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-  ">
-      <span>Chat Assistant</span>
-      <span id="chat-close" style="cursor:pointer;font-size:18px;">✕</span>
-  </div>
-
-  <div style="flex:1; padding:12px; overflow-y:auto; background:#f9f9f9;">
-      <div id="chat-messages" style="display:flex; flex-direction:column; gap:8px; font-size:14px;"></div>
-  </div>
-
-  <div style="
-      display:flex;
-      gap:8px;
-      padding:12px;
-      border-top:1px solid #eee;
-      background:white;
-  ">
-      <input 
-        id="chat-input"
-        type="text"
-        placeholder="Type your message..."
-        style="
-          flex:1;
-          padding:10px;
-          border:1px solid #ccc;
-          border-radius:8px;
-          outline:none;
-          font-size:14px;
-        "
-      />
-
-      <button 
-        id="chat-send"
-        style="
-          padding:10px 14px;
-          border:none;
-          border-radius:8px;
-          background:#007bff;
-          color:white;
-          cursor:pointer;
-          font-weight:600;
-        "
-      >
-        Send
-      </button>
-  </div>
-`;
-
-document.body.append(box);
-
-button.onclick = () => {
-  box.style.display = box.style.display === 'none' ? 'flex' : 'none';
-};
-
-document.addEventListener('click', (e) => {
-  if (e.target.id === 'chat-close') {
-    box.style.display = 'none';
   }
-});
+
+  Object.assign(box.style, {
+    zIndex: "99999",
+    background: "rgba(14,14,20,0.94)",
+    backdropFilter: "blur(40px)",
+    boxShadow: "0 70px 220px rgba(0,0,0,0.9)",
+    border: "1px solid rgba(255,255,255,0.06)",
+    display: "none",
+    flexDirection: "column",
+    overflow: "hidden",
+    fontFamily: "Inter, system-ui, sans-serif",
+    color: "white",
+  });
+
+  responsive();
+  window.addEventListener("resize", responsive);
+
+  box.innerHTML = `
+  <!-- HEADER -->
+  <div style="
+    padding:16px 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:linear-gradient(180deg,rgba(0,0,0,0.55),rgba(0,0,0,0.25));
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  ">
+    <div style="display:flex;gap:8px">
+      <span style="width:11px;height:11px;background:#ff5f57;border-radius:50%;"></span>
+      <span style="width:11px;height:11px;background:#febc2e;border-radius:50%; "></span>
+      <span style="width:11px;height:11px;background:#28c840;border-radius:50%;"></span>
+    </div>
+
+    <span style="
+      font-size:12px;
+      letter-spacing:.26em;
+      font-weight:700;
+      background:linear-gradient(90deg,#fff,#9f9fff);
+      -webkit-background-clip:text;
+      color:transparent;
+    ">
+      AI ASSISTANT
+    </span>
+
+    <span id="chat-close" style="cursor:pointer;font-size:18px;opacity:.6;">✕</span>
+  </div>
+
+  <!-- MESSAGES -->
+  <div id="chat-messages" style="
+    flex:1;
+    padding:18px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  "></div>
+
+  <!-- INPUT -->
+  <div style="
+    padding:14px;
+    border-top:1px solid rgba(255,255,255,0.06);
+    display:flex;
+    gap:10px;
+  ">
+    <input id="chat-input" placeholder="Type a message..."
+      style="
+        flex:1;
+        padding:14px 16px;
+        border-radius:18px;
+        border:1px solid rgba(255,255,255,0.1);
+        background:#0f0f14;
+        color:white;
+        outline:none;
+        font-size:14px;
+      "/>
+
+    <button id="chat-send"
+      style="
+        padding:14px 18px;
+        border-radius:18px;
+        border:none;
+        background:linear-gradient(145deg,#fff,#e6e6e6);
+        color:black;
+        font-weight:700;
+        cursor:pointer;
+        box-shadow:0 6px 18px rgba(0,0,0,0.35);
+      ">➤</button>
+  </div>
+  `;
+
+  document.body.append(box);
 
 
+  button.onclick = () =>
+    (box.style.display = box.style.display === "none" ? "flex" : "none");
+
+  document.addEventListener("click", (e) => {
+    if (e.target.id === "chat-close") box.style.display = "none";
+  });
+
+  const sendBtn = box.querySelector("#chat-send");
+  const input = box.querySelector("#chat-input");
+  const messageArea = box.querySelector("#chat-messages");
 
 
-const sendBtn = document.getElementById('chat-send');
-const input = document.getElementById('chat-input');
-const messageArea = document.getElementById('chat-messages');
+  function bubble(text, from) {
+    const el = document.createElement("div");
+    el.innerText = text;
 
-
-function addMessage(text,from){
-    const bubble = document.createElement('div');
-    bubble.innerText = text;
-    Object.assign(bubble.style,{
-        maxWidth:'80%',
-        padding:' 8px 10px',
-        borderRadius:'12px',
-        wordBreak:'break-word',
-        fontSize:'14px',
-        backgroundColor: from === 'user' ? '#007bff' : '#e5e5e5',
-        color: from === 'user' ? 'white' : 'black',
-        alignSelf: from === 'user' ? 'flex-end' : 'flex-start',
-        lineHeight:'1.4',
-        marginBottom:'8px',
-
-
-
-        borderTopRightRadius: from === 'user' ? '4px' : '12px',
-        borderTopLeftRadius: from === 'user' ? '12px' : '4px',
-        
-
-
-
-
+    Object.assign(el.style, {
+      maxWidth: "78%",
+      padding: "13px 18px",
+      borderRadius: "20px",
+      fontSize: "14px",
+      lineHeight: "1.45",
+      background:
+        from === "user"
+          ? "linear-gradient(145deg,#ffffff,#eaeaea)"
+          : "rgba(255,255,255,0.06)",
+      color: from === "user" ? "#000" : "#fff",
+      alignSelf: from === "user" ? "flex-end" : "flex-start",
+      border: "1px solid rgba(255,255,255,0.08)",
     });
-   messageArea.append(bubble);
-   messageArea.scrollTop = messageArea.scrollHeight;
-  }
- 
-  sendBtn.onclick = async ()=>{
-    const text = input.value.trim();
-    if(!text) return;
-    addMessage(text,'user');
-    input.value = '';
 
-    const typing = document.createElement('div');
-    typing.innerText = 'Typing...';
-    Object.assign(typing.style,{
-        fontSize:'12px',
-        color:'#888',
-        alignSelf:'flex-start',
-        marginBottom:'8px',
-    });
-    messageArea.append(typing);
+    messageArea.append(el);
     messageArea.scrollTop = messageArea.scrollHeight;
-  
-try {
-    const response = await fetch(api_url,{
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json',
-        },
-        body:JSON.stringify({
-            ownerId,
-            message:text,
-        }),
-    })
-    console.log(response);
-  
-    const data = await response.json();
-    console.log(data);
-    addMessage(data, 'bot');
-        messageArea.removeChild(typing);
-
-} catch (error) {
-  console.log(error);
-  addMessage("Server error. Try again.", 'bot');
-  if (typing.parentNode) messageArea.removeChild(typing);
-}
+  }
 
 
+  function typing() {
+    const t = document.createElement("div");
+    t.innerHTML = "● ● ●";
+    t.style.opacity = ".5";
+    t.style.fontSize = "12px";
+    return t;
+  }
 
 
-}
+  async function sendMessage() {
+    const text = input.value.trim();
+    if (!text) return;
 
+    bubble(text, "user");
+    input.value = "";
 
+    const t = typing();
+    messageArea.append(t);
 
-})()
+    try {
+      const res = await fetch(api_url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ownerId, message: text }),
+      });
+
+      const data = await res.json();
+      t.remove();
+      bubble(data, "bot");
+    } catch {
+      t.remove();
+      bubble("Server error.", "bot");
+    }
+  }
+
+  sendBtn.onclick = sendMessage;
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendMessage();
+  });
+})();
