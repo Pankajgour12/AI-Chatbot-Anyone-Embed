@@ -132,16 +132,42 @@ FINAL ANSWER
 })
 
 
-return NextResponse.json(
+const res = NextResponse.json(
   response.text?.trim() || "Sorry, I couldn't generate a response."
 )
 
+res.headers.set("Access-Control-Allow-Origin", "*")
+res.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+
+res.headers.set("Access-Control-Allow-Headers", "Content-Type")
+return res;
+
     
 } catch(error) {
-    return NextResponse.json(
+   const res= NextResponse.json(
             {message:`Chat Error ${error}`},
             {status:500}
     )
+    res.headers.set("Access-Control-Allow-Origin", "*")
+res.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+
+res.headers.set("Access-Control-Allow-Headers", "Content-Type")
+return res;
     }
+
+ 
     
 }
+
+
+export const OPTIONS = async () => {
+  return new NextResponse(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
+  });
+};
+
