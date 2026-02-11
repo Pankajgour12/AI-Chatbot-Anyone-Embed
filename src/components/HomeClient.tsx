@@ -107,7 +107,7 @@ const HomeClient = ({ email }: { email: string }) => {
                       overflow-hidden
                     "
                            onClick={()=>navigate.push("/dashboard")}   >
-                                {/* subtle light sweep */}
+                               
                                 <span
                                   className="
                         absolute inset-0 opacity-0 group-hover:opacity-100
@@ -116,7 +116,7 @@ const HomeClient = ({ email }: { email: string }) => {
                       "
                                 />
                   
-                                {/* bottom accent line */}
+                       
                                 <span
                                   className="
                         absolute bottom-0 left-1/2 -translate-x-1/2
@@ -141,6 +141,7 @@ const HomeClient = ({ email }: { email: string }) => {
                       shadow-[0_8px_30px_rgba(0,0,0,0.5)]
                       overflow-hidden
                     "
+                    disabled={loading}
                            onClick={handleLogin} >
                                
                                 <span
@@ -167,7 +168,7 @@ const HomeClient = ({ email }: { email: string }) => {
                               </motion.button>
                 )}
 
-                {/* SECOND BUTTON */}
+               
                 <a
                   href="#feature"
                   className="
@@ -203,7 +204,7 @@ const HomeClient = ({ email }: { email: string }) => {
               <div className="absolute -inset-10 bg-amber-500/10 blur-[140px] rounded-full" />
 
               <div className="relative p-[2px] rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-white/10 shadow-[0_30px_120px_rgba(0,0,0,0.8)]">
-                {/* MAIN CARD */}
+                
                 <div className="relative rounded-3xl bg-white/95 backdrop-blur-2xl p-7 sm:p-9 overflow-hidden">
                   <div className="flex flex-col  justify-between gap-2 mb-6">
                     <div className="text-sm px-1.5  rounded-md bg-amber-100 text-amber-700 font-medium shadow w-fit">
@@ -313,66 +314,102 @@ const HomeClient = ({ email }: { email: string }) => {
 
        
 
+
+
+
 <section className="relative py-28 px-6 border-t border-white/10 overflow-hidden">
-  {/* ambient glow */}
+
+  
   <div className="absolute inset-0 pointer-events-none">
-    <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-amber-500/5 blur-3xl rounded-full" />
+    <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-white/5 blur-3xl rounded-full" />
+    <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-slate-500/5 blur-3xl rounded-full" />
   </div>
 
   <div className="relative max-w-7xl mx-auto text-center">
-    <h2 className="text-5xl md:text-6xl font-semibold tracking-tight bg-gradient-to-r from-amber-300 via-white to-purple-400 bg-clip-text text-transparent">
-     Launch Your AI Chatbot in Minutes
+
+    <h2 className="
+      text-5xl md:text-6xl font-semibold tracking-tight leading-tight
+      bg-gradient-to-r from-white via-zinc-300 to-slate-400
+      bg-clip-text text-transparent
+    ">
+      Launch Your AI Chatbot in Minutes
     </h2>
 
-    <p className="mt-6 text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-      No coding. No complexity. Just a simple 3-step workflow to get your smart assistant live on any website instantly.
+    
+    <p className="mt-7 text-zinc-400 max-w-2xl mx-auto text-lg leading-relaxed">
+      A clean three-step process designed for speed and clarity.
+      Set your details once and your assistant is ready to handle conversations.
     </p>
 
-    <div className="mt-24 grid md:grid-cols-3 gap-12">
+    
+    <div className="mt-28 grid md:grid-cols-3 gap-12">
+
       {[
         {
-          title: "Access Your Dashboard",
-          desc: "Sign in and enter your control panel. This is where you configure knowledge, customize behavior, and monitor conversations in real-time.",
+          title: "Open Your Dashboard",
+          desc: "Log into your account and access the main control panel where all chatbot settings and conversations are managed.",
         },
         {
-          title: "Generate Embed Script",
-          desc: "Use the Embed action in the top-right corner to instantly produce your unique integration snippet tailored to your workspace.",
+          title: "Add Business Details",
+          desc: "Enter your business name, support email and chatbot knowledge. This information helps the assistant respond accurately and represent your brand correctly.",
         },
         {
-          title: "Deploy to Your Website",
-          desc: "Insert the generated script just before the closing body tag of your website. Your assistant becomes instantly available to visitors.",
+          title: "Generate & Embed Script",
+          desc: "Create your unique embed code and paste it before the closing body tag of your website to go live instantly.",
         },
       ].map((step, i) => (
         <div
           key={i}
-          className="group relative bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-12 text-left hover:border-amber-400/40 transition duration-500"
+          className="
+            group relative
+            bg-gradient-to-b from-white/10 to-white/3
+            border border-white/10
+            backdrop-blur-2xl
+            rounded-3xl
+            p-12
+            text-left
+            transition duration-500
+            hover:border-white/25
+          "
         >
-          {/* step number */}
-          <div className="absolute -top-6 left-10 w-14 h-14 rounded-full bg-black border border-amber-400/40 text-amber-300 font-semibold text-lg flex items-center justify-center shadow-xl">
+          {/* STEP BADGE */}
+          <div className="
+            absolute -top-6 left-10
+            w-14 h-14 rounded-full
+            bg-black border border-white/15
+            text-zinc-300 font-semibold text-lg
+            flex items-center justify-center
+            shadow-xl
+          ">
             0{i + 1}
           </div>
 
-          <h3 className="text-2xl font-medium text-white mt-4">
+          <h3 className="text-2xl font-medium text-white mt-6">
             {step.title}
           </h3>
 
-          <p className="text-gray-400 mt-4 leading-relaxed text-[15px]">
+          <p className="text-zinc-400 mt-5 leading-relaxed text-[15px]">
             {step.desc}
           </p>
 
-          {/* subtle hover gradient */}
-          <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-amber-400/5 via-transparent to-transparent" />
+          {/* HOVER LIGHT */}
+          <div className="
+            absolute inset-0 rounded-3xl
+            opacity-0 group-hover:opacity-100
+            transition pointer-events-none
+            bg-gradient-to-b from-white/10 to-transparent
+          " />
         </div>
       ))}
     </div>
 
-    <p className="text-gray-500 mt-16 text-sm tracking-wide">
-      Compatible with modern frameworks and traditional websites alike.
+    
+    <p className="text-zinc-500 mt-20 text-sm tracking-wide">
+      Works with modern frameworks and traditional websites alike.
     </p>
+
   </div>
 </section>
-
-
 
 
 
