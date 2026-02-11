@@ -1,33 +1,32 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import logo from "@/assets/logo.png";
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
-const EmbedClient = ({ownerId}:{ownerId:string}) => {
-    const navigate = useRouter()
-    const [copied,setCopied] =useState(false)
-    const [previewOpen, setPreviewOpen] = useState(false)
+const EmbedClient = ({ ownerId }: { ownerId: string }) => {
+  const navigate = useRouter();
+  const [copied, setCopied] = useState(false);
+  const [previewOpen, setPreviewOpen] = useState(false);
 
-    const embedCode = `
+  const embedCode = `
         <script src="${process.env.NEXT_PUBLIC_APP_URL}/chatBot.js"
            data-ownerId="${ownerId}">
         </script>
-    `
-    const handleCopy = () => {
-    navigator.clipboard.writeText(embedCode)
-    setCopied(true)
-    toast.success("Code Copied")
-    setTimeout(() =>setCopied(false),2000);
-
-    }
+    `;
+  const handleCopy = () => {
+    navigator.clipboard.writeText(embedCode);
+    setCopied(true);
+    toast.success("Code Copied");
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
-    <div className='min-h-screen aura-bg'>
-       <motion.nav
+    <div className="min-h-screen app-bg">
+      <motion.nav
         initial={{ y: -70, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
@@ -69,9 +68,8 @@ const EmbedClient = ({ownerId}:{ownerId:string}) => {
     shadow-[0_8px_30px_rgba(0,0,0,0.5)]
     overflow-hidden
   "
-  onClick={()=>navigate.push('/dashboard')}
+              onClick={() => navigate.push("/dashboard")}
             >
-              
               <span
                 className="
       absolute inset-0 opacity-0 group-hover:opacity-100
@@ -80,7 +78,6 @@ const EmbedClient = ({ownerId}:{ownerId:string}) => {
     "
               />
 
-           
               <span
                 className="
       absolute bottom-0 left-1/2 -translate-x-1/2
@@ -101,141 +98,210 @@ const EmbedClient = ({ownerId}:{ownerId:string}) => {
         </div>
       </motion.nav>
 
-     
-
-<div className="flex justify-center px-4 py-20">
-  <motion.div
-    initial={{ opacity: 0, y: 40 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.7 }}
-    className="
+      <div className="flex justify-center nebula-bg px-4 py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="
       relative w-full max-w-6xl
-      rounded-[36px]
-      border border-white/[0.05]
-      bg-[#050506]
-      shadow-[0_100px_300px_rgba(0,0,0,0.95)]
+      rounded-[42px]
+      bg-[#050507]
+      border border-white/[0.03]
+      shadow-[0_180px_500px_rgba(0,0,0,1)]
       overflow-hidden
     "
-  >
-    {/* SUBTLE LIGHT */}
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_0%,rgba(255,255,255,0.06),transparent_40%)] pointer-events-none" />
+        >
+          <div
+            className="absolute inset-0 pointer-events-none
+      bg-[radial-gradient(circle_at_50%_-20%,rgba(255,255,255,0.06),transparent_40%)]"
+          />
 
-    <div className="grid lg:grid-cols-[1fr_1.2fr] gap-16 p-8 lg:p-16">
+          <div className="grid lg:grid-cols-[1fr_1.25fr] gap-20 p-12 lg:p-20">
+            {/* LEFT  */}
+            <div className="flex flex-col justify-center space-y-12">
+              <div>
+                <span className="text-[10px] tracking-[0.7em] text-zinc-600">
+                  QUICK INTEGRATION
+                </span>
 
-      {/* LEFT COMPACT */}
-      <div className="flex flex-col justify-center space-y-6 text-zinc-300">
+                <h1
+                  className="
+  text-4xl font-semibold mt-4 leading-tight
+  bg-gradient-to-r 
+  from-[#f5f7ff] 
+  via-[#c7d2fe] 
+  to-[#a5b4fc]
+  bg-clip-text text-transparent
+"
+                >
+                  Embed Your AI Assistant
+                </h1>
 
-        <span className="text-[10px] tracking-[0.6em] text-zinc-600">
-          QUICK SETUP
-        </span>
+                <p
+                  className="
+  text-sm mt-4 max-w-sm leading-relaxed
+  text-zinc-400
+"
+                >
+                  A single lightweight script transforms your website into a
+                  real-time conversational experience. No installs. No SDK. No
+                  dependencies.
+                </p>
+                <p
+                  className="
+  text-sm font-medium
+  bg-gradient-to-r
+  from-[#e2e8ff]
+  to-[#a5b4fc]
+  bg-clip-text text-transparent
+"
+                >
+                  Copy Script
+                </p>
+              </div>
 
-        <h1 className="text-4xl font-semibold leading-tight">
-          Embed
-          <span className="text-[#c8b08a]"> AI Chat</span>
-        </h1>
-
-        <p className="text-zinc-500 text-sm max-w-sm">
-          Paste a single script and your website gets a
-          real-time AI assistant instantly.
-        </p>
-
-        {/* MINI STEPS */}
-        <div className="space-y-3 text-xs text-zinc-500">
-          <p>1. Copy script</p>
-          <p>2. Paste before &lt;/body&gt;</p>
-          <p>3. Reload site</p>
-        </div>
-      </div>
-
-      {/* RIGHT CONSOLE */}
-      <div className="relative">
-
-        <div className="
-          relative rounded-[24px]
-          border border-white/[0.08]
-          bg-[#0b0b0c]
-          shadow-[0_50px_180px_rgba(0,0,0,0.9)]
-          overflow-hidden
-        ">
-
-          {/* TOP BAR */}
-          <div className="
-            flex items-center justify-between
-            px-6 py-3
-            border-b border-white/[0.06]
-            bg-[#111]
-          ">
-            <div className="flex gap-2">
-              <span className="w-2.5 h-2.5 bg-red-500 rounded-full" />
-              <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full" />
-              <span className="w-2.5 h-2.5 bg-green-500 rounded-full" />
-            </div>
-
-            <span className="text-[10px] tracking-[0.4em] text-zinc-500">
-              INSTALL
-            </span>
-
-            <span className="text-[10px] text-[#c8b08a]">
-              READY
-            </span>
-          </div>
-
-          {/* TERMINAL CODE */}
-          <div className="relative p-8 font-mono text-[13px] leading-7">
-
-            <div className="text-zinc-500 mb-3">
-              // embed before closing body tag
-            </div>
-
-            <pre className="
-              text-[#e8d2a8]
-              whitespace-pre-wrap
-              break-words
-            ">
-{embedCode}
-            </pre>
-
-            {/* COPY BTN */}
-            <button
-              onClick={handleCopy}
-              disabled={copied}
-              className="
-                absolute top-6 right-6
-                px-4 py-1.5 rounded-md
-                text-[11px] font-semibold
-                bg-[#141414]
-                border border-[#c8b08a]/40
-                text-[#c8b08a]
-                hover:bg-[#1d1d1d]
-                transition
+              {/* STEPS */}
+              <div className="space-y-6">
+                {[
+                  ["Copy Script", "Click copy or manually select the code."],
+                  ["Paste in HTML", "Place before closing body tag."],
+                  ["Reload Website", "Assistant appears automatically."],
+                ].map((step, i) => (
+                  <div key={i} className="flex gap-4">
+                    <div
+                      className="
+                w-9 h-9 rounded-xl
+                bg-[#0f0f12]
+                border border-white/[0.06]
+                flex items-center justify-center
+                text-zinc-400 text-xs font-semibold
+                shadow-inner
               "
-            >
-              {copied ? "Copied" : "Copy"}
-            </button>
+                    >
+                      {i + 1}
+                    </div>
+
+                    <div>
+                      <p className="text-white text-sm font-medium">
+                        {step[0]}
+                      </p>
+                      <p className="text-zinc-500 text-xs">{step[1]}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT  */}
+            <div className="relative">
+              <div
+                className="
+          relative rounded-[30px]
+          backdrop-blur-xl
+          bg-white/[0.02]
+          border border-white/[0.05]
+          shadow-[0_80px_260px_rgba(0,0,0,1)]
+          overflow-hidden
+        "
+              >
+                <div
+                  className="
+            flex items-center justify-between
+            px-6 py-4
+            border-b border-white/[0.05]
+            bg-black/40
+          "
+                >
+                  <div className="flex gap-2">
+                    <span className="w-2.5 h-2.5 bg-red-500 rounded-full" />
+                    <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full" />
+                    <span className="w-2.5 h-2.5 bg-green-500 rounded-full" />
+                  </div>
+
+                  <span
+                    className="
+  text-[10px] tracking-[0.4em]
+  bg-gradient-to-r 
+  from-[#94a3ff]
+  to-[#c7d2fe]
+  bg-clip-text text-transparent
+"
+                  >
+                    index.html
+                  </span>
+
+                  <span
+                    className="
+  text-[10px] tracking-[0.4em]
+  bg-gradient-to-r 
+  from-[#94a3ff]
+  to-[#c7d2fe]
+  bg-clip-text text-transparent
+"
+                  >
+                    ACTIVE
+                  </span>
+                </div>
+
+                {/* CODE  */}
+                <div className="relative p-10 font-mono text-[13px] leading-7">
+                  <div className="text-zinc-600 mb-3">
+                    // place before &lt;/body&gt;
+                  </div>
+
+                  <pre
+                    className="
+  whitespace-pre-wrap break-words
+  font-mono
+  text-[14px] leading-7
+  bg-gradient-to-r 
+  from-[#cbd5ff] 
+  via-[#e0e7ff] 
+  to-[#c7d2fe]
+  bg-clip-text text-transparent
+"
+                  >
+                    {embedCode}
+                  </pre>
+
+                  <button
+                    onClick={handleCopy}
+                    disabled={copied}
+                    className="
+                absolute top-6 right-6
+              
+  px-4 py-1.5 rounded-md
+  text-[11px] font-semibold
+  bg-[#121216]
+  border border-[#232532]
+  text-[#c7d2fe]
+  hover:bg-[#1a1a22]
+  transition
+
+              "
+                  >
+                    {copied ? "Copied" : "Copy"}
+                  </button>
+                </div>
+              </div>
+
+              <p className="text-[11px] text-zinc-600 mt-5 text-center">
+                Lightweight • Secure • Universal Compatibility
+              </p>
+            </div>
           </div>
-        </div>
-
-        <p className="text-[11px] text-zinc-600 mt-4 text-center">
-          Lightweight • No Dependencies • Instant Load
-        </p>
+        </motion.div>
       </div>
-    </div>
-  </motion.div>
-</div>
 
+      {/* ====  LIVE PREVIEW  ====== */}
 
-
-
-
-
-{/* ====  LIVE PREVIEW  ====== */}
-
-<div className="flex justify-center px-4 pb-24 mt-10">
-  <motion.div
-    initial={{ opacity: 0, y: 40 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6 }}
-    className="
+      <div className="flex justify-center px-4 pb-24 mt-10">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="
       relative w-full max-w-6xl
       rounded-[26px]
       border border-white/10
@@ -243,61 +309,58 @@ const EmbedClient = ({ownerId}:{ownerId:string}) => {
       shadow-[0_70px_240px_rgba(0,0,0,0.95)]
       overflow-hidden
     "
-  >
-    
-    <div className="flex items-center justify-between px-6 py-3 border-b border-white/10 bg-black/40 backdrop-blur">
-      <div className="flex gap-2">
-        <span className="w-3 h-3 bg-red-500 rounded-full" />
-        <span className="w-3 h-3 bg-yellow-400 rounded-full" />
-        <span className="w-3 h-3 bg-green-500 rounded-full" />
-      </div>
+        >
+          <div className="flex items-center justify-between px-6 py-3 border-b border-white/10 bg-black/40 backdrop-blur">
+            <div className="flex gap-2">
+              <span className="w-3 h-3 bg-red-500 rounded-full" />
+              <span className="w-3 h-3 bg-yellow-400 rounded-full" />
+              <span className="w-3 h-3 bg-green-500 rounded-full" />
+            </div>
 
-      <span className="text-xs tracking-[0.3em] text-zinc-500">
-        LIVE PREVIEW
-      </span>
+            <span className="text-xs tracking-[0.3em] text-zinc-500">
+              LIVE PREVIEW
+            </span>
 
-      <span className="text-xs text-emerald-400 border border-emerald-400/30 px-2 py-[2px] rounded">
-        ACTIVE
-      </span>
-    </div>
+            <span className="text-xs text-emerald-400 border border-emerald-400/30 px-2 py-[2px] rounded">
+              ACTIVE
+            </span>
+          </div>
 
-   {/* left */}
-    <div className="grid lg:grid-cols-2 gap-10 p-8 lg:p-5 bg-gradient-to-br from-zinc-950 via-black to-zinc-900">
+          {/* left */}
+          <div className="grid lg:grid-cols-2 gap-10 p-8 lg:p-5 bg-gradient-to-br from-zinc-950 via-black to-zinc-900">
+            <div className="flex flex-col justify-center text-white space-y-5">
+              <h1 className="text-3xl lg:text-4xl font-bold leading-tight">
+                This Chat Looks
+                <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                  {" "}
+                  Exactly Like{" "}
+                </span>
+                Your Website
+              </h1>
 
-    
-      <div className="flex flex-col justify-center text-white space-y-5">
-        <h1 className="text-3xl lg:text-4xl font-bold leading-tight">
-          This Chat Looks  
-          <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-            {" "}Exactly Like{" "}
-          </span>
-          Your Website
-        </h1>
+              <p className="text-zinc-400 text-sm max-w-md leading-relaxed">
+                The AI assistant automatically adapts to your site theme.
+                Visitors can chat instantly while browsing — without breaking
+                your design or layout.
+              </p>
 
-        <p className="text-zinc-400 text-sm max-w-md leading-relaxed">
-          The AI assistant automatically adapts to your site theme.  
-          Visitors can chat instantly while browsing —  
-          without breaking your design or layout.
-        </p>
+              <div className="flex gap-3 mt-3">
+                <span className="px-3 py-1 text-xs border border-white/10 rounded-lg text-zinc-400">
+                  Instant Replies
+                </span>
+                <span className="px-3 py-1 text-xs border border-white/10 rounded-lg text-zinc-400">
+                  Mobile Friendly
+                </span>
+                <span className="px-3 py-1 text-xs border border-white/10 rounded-lg text-zinc-400">
+                  Auto Theme
+                </span>
+              </div>
+            </div>
 
-        <div className="flex gap-3 mt-3">
-          <span className="px-3 py-1 text-xs border border-white/10 rounded-lg text-zinc-400">
-            Instant Replies
-          </span>
-          <span className="px-3 py-1 text-xs border border-white/10 rounded-lg text-zinc-400">
-            Mobile Friendly
-          </span>
-          <span className="px-3 py-1 text-xs border border-white/10 rounded-lg text-zinc-400">
-            Auto Theme
-          </span>
-        </div>
-      </div>
-
-      {/*  RIGHT   */}
-      <div className="relative min-h-[500px]">
-
-
-        <div className="
+            {/*  RIGHT   */}
+            <div className="relative min-h-[500px]">
+              <div
+                className="
           absolute bottom-6 right-6
           w-14 h-14 rounded-full
           bg-gradient-to-br from-zinc-800 to-black
@@ -305,15 +368,16 @@ const EmbedClient = ({ownerId}:{ownerId:string}) => {
           shadow-[0_25px_80px_rgba(0,0,0,0.9)]
           flex items-center justify-center
           text-white text-xl
-        ">
-          💬
-        </div>
+        "
+              >
+                💬
+              </div>
 
-        {/* CHAT PANEL */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="
+              {/* CHAT PANEL */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="
             absolute
             left-1/2 -translate-x-1/2
             bottom-20
@@ -330,71 +394,55 @@ const EmbedClient = ({ownerId}:{ownerId:string}) => {
             shadow-[0_70px_240px_rgba(0,0,0,0.95)]
             flex flex-col overflow-hidden
           "
-        >
-          
-          <div className="px-5 py-4 flex justify-between items-center border-b border-white/10 bg-black/40">
-            <div className="flex gap-2">
-              <span className="w-2.5 h-2.5 bg-red-500 rounded-full" />
-              <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full" />
-              <span className="w-2.5 h-2.5 bg-green-500 rounded-full" />
+              >
+                <div className="px-5 py-4 flex justify-between items-center border-b border-white/10 bg-black/40">
+                  <div className="flex gap-2">
+                    <span className="w-2.5 h-2.5 bg-red-500 rounded-full" />
+                    <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full" />
+                    <span className="w-2.5 h-2.5 bg-green-500 rounded-full" />
+                  </div>
+
+                  <span className="text-xs tracking-[0.25em] font-semibold bg-gradient-to-r from-white to-indigo-300 bg-clip-text text-transparent">
+                    AI ASSISTANT
+                  </span>
+
+                  <span className="text-zinc-500 text-sm">✕</span>
+                </div>
+
+                <div className="flex-1 p-4 flex flex-col gap-3 text-xs overflow-y-auto">
+                  <div className="self-start px-4 py-2 rounded-xl bg-white/10 border border-white/10 text-white max-w-[80%]">
+                    Hello 👋 How can I help you?
+                  </div>
+
+                  <div className="self-end px-4 py-2 rounded-xl bg-white text-black shadow max-w-[80%]">
+                    Do you offer support?
+                  </div>
+
+                  <div className="self-start px-4 py-2 rounded-xl bg-white/10 border border-white/10 text-white max-w-[80%]">
+                    Yes, 24/7 support available.
+                  </div>
+                </div>
+
+                <div className="p-4 border-t border-white/10 flex gap-2">
+                  <input
+                    disabled
+                    placeholder="Type a message..."
+                    className="flex-1 bg-[#0f0f14] border border-white/15 rounded-xl px-3 py-2 text-xs text-zinc-400"
+                  />
+                  <button
+                    disabled
+                    className="px-3 py-2 rounded-xl bg-white text-black text-xs font-semibold shadow"
+                  >
+                    ➤
+                  </button>
+                </div>
+              </motion.div>
             </div>
-
-            <span className="text-xs tracking-[0.25em] font-semibold bg-gradient-to-r from-white to-indigo-300 bg-clip-text text-transparent">
-              AI ASSISTANT
-            </span>
-
-            <span className="text-zinc-500 text-sm">✕</span>
-          </div>
-
-          
-          <div className="flex-1 p-4 flex flex-col gap-3 text-xs overflow-y-auto">
-            <div className="self-start px-4 py-2 rounded-xl bg-white/10 border border-white/10 text-white max-w-[80%]">
-              Hello 👋 How can I help you?
-            </div>
-
-            <div className="self-end px-4 py-2 rounded-xl bg-white text-black shadow max-w-[80%]">
-              Do you offer support?
-            </div>
-
-            <div className="self-start px-4 py-2 rounded-xl bg-white/10 border border-white/10 text-white max-w-[80%]">
-              Yes, 24/7 support available.
-            </div>
-          </div>
-
-          
-          <div className="p-4 border-t border-white/10 flex gap-2">
-            <input
-              disabled
-              placeholder="Type a message..."
-              className="flex-1 bg-[#0f0f14] border border-white/15 rounded-xl px-3 py-2 text-xs text-zinc-400"
-            />
-            <button
-              disabled
-              className="px-3 py-2 rounded-xl bg-white text-black text-xs font-semibold shadow"
-            >
-              ➤
-            </button>
           </div>
         </motion.div>
       </div>
     </div>
-  </motion.div>
-</div>
+  );
+};
 
-
-
-
-
-
-
-
-    
-
-
-
-
-    </div>
-  )
-}
-
-export default EmbedClient
+export default EmbedClient;
