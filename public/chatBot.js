@@ -1,10 +1,9 @@
 (function () {
-  const api_url = "http://localhost:3000/api/chat";
+  const api_url = "https://ai-chatbot-anyone-embed.vercel.app/api/chat";
   const scriptTag = document.currentScript;
   const ownerId = scriptTag.getAttribute("data-ownerId");
   if (!ownerId) return console.error("ownerId missing");
 
-  /* ================= FLOAT BUTTON ================= */
 
   const button = document.createElement("div");
   button.innerHTML = "💬";
@@ -31,7 +30,6 @@
     transition: "all .25s ease",
   });
 
-  // Glow pulse animation
   setInterval(() => {
     button.style.boxShadow =
       "0 20px 80px rgba(0,0,0,0.6), 0 0 18px rgba(99,102,241,0.6)";
@@ -43,7 +41,6 @@
 
   document.body.append(button);
 
-  /* ================= CHAT BOX ================= */
 
   const box = document.createElement("div");
 
@@ -134,7 +131,6 @@
   const input = box.querySelector("#chat-input");
   const messageArea = box.querySelector("#chat-messages");
 
-  /* ================= BUBBLES ================= */
 function bubble(text, from) {
   const el = document.createElement("div");
 
@@ -209,7 +205,6 @@ t.remove();
 
 let botText = "";
 
-// SUCCESS CASE
 if (res.ok) {
   botText =
     typeof data === "string"
@@ -217,7 +212,6 @@ if (res.ok) {
       : data.reply || data.message || "I am here to help!";
 }
 
-// ERROR CASE
 else {
   const raw =
     typeof data === "string" ? data : JSON.stringify(data);
