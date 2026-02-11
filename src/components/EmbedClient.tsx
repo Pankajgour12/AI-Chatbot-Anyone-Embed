@@ -101,58 +101,133 @@ const EmbedClient = ({ownerId}:{ownerId:string}) => {
         </div>
       </motion.nav>
 
-      <div className="flex justify-center px-4 py-16 mt-8">
+     
+
+<div className="flex justify-center px-4 py-20">
   <motion.div
-    initial={{ opacity: 0, y: 30 }}
+    initial={{ opacity: 0, y: 40 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
+    transition={{ duration: 0.7 }}
     className="
-      relative w-full max-w-4xl
-      text-white rounded-3xl
-      bg-gradient-to-br from-zinc-900/80 to-black/80
-      border border-white/10
-      backdrop-blur-2xl
-      p-10
-      shadow-[0_50px_180px_rgba(0,0,0,0.95)]
+      relative w-full max-w-6xl
+      rounded-[36px]
+      border border-white/[0.05]
+      bg-[#050506]
+      shadow-[0_100px_300px_rgba(0,0,0,0.95)]
       overflow-hidden
     "
   >
-    {/* glow */}
-    <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-indigo-500/10 blur-[140px] rounded-full" />
+    {/* SUBTLE LIGHT */}
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_0%,rgba(255,255,255,0.06),transparent_40%)] pointer-events-none" />
 
-    <h1 className="text-3xl font-semibold tracking-tight bg-gradient-to-r from-white via-zinc-300 to-zinc-500 bg-clip-text text-transparent mb-3">
-      Embed AI Chatbot
-    </h1>
+    <div className="grid lg:grid-cols-[1fr_1.2fr] gap-16 p-8 lg:p-16">
 
-    <p className="text-zinc-400 text-sm mb-6">
-      Paste this script before <code className="text-white">&lt;/body&gt;</code>
-    </p>
+      {/* LEFT COMPACT */}
+      <div className="flex flex-col justify-center space-y-6 text-zinc-300">
 
-    {/* CODE BOX */}
-    <div className="relative bg-black/70 border border-white/10 rounded-xl p-6 text-sm font-mono mb-10 overflow-hidden">
-      <pre className="text-zinc-200">{embedCode}</pre>
+        <span className="text-[10px] tracking-[0.6em] text-zinc-600">
+          QUICK SETUP
+        </span>
 
-      <button
-        onClick={handleCopy}
-        disabled={copied}
-        className="
-          absolute top-3 right-3
-          px-4 py-1.5 rounded-lg text-xs font-semibold
-          bg-white/10 border border-white/20
-          hover:bg-white/20 transition
-        "
-      >
-        {copied ? "Copied" : "Copy"}
-      </button>
+        <h1 className="text-4xl font-semibold leading-tight">
+          Embed
+          <span className="text-[#c8b08a]"> AI Chat</span>
+        </h1>
+
+        <p className="text-zinc-500 text-sm max-w-sm">
+          Paste a single script and your website gets a
+          real-time AI assistant instantly.
+        </p>
+
+        {/* MINI STEPS */}
+        <div className="space-y-3 text-xs text-zinc-500">
+          <p>1. Copy script</p>
+          <p>2. Paste before &lt;/body&gt;</p>
+          <p>3. Reload site</p>
+        </div>
+      </div>
+
+      {/* RIGHT CONSOLE */}
+      <div className="relative">
+
+        <div className="
+          relative rounded-[24px]
+          border border-white/[0.08]
+          bg-[#0b0b0c]
+          shadow-[0_50px_180px_rgba(0,0,0,0.9)]
+          overflow-hidden
+        ">
+
+          {/* TOP BAR */}
+          <div className="
+            flex items-center justify-between
+            px-6 py-3
+            border-b border-white/[0.06]
+            bg-[#111]
+          ">
+            <div className="flex gap-2">
+              <span className="w-2.5 h-2.5 bg-red-500 rounded-full" />
+              <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full" />
+              <span className="w-2.5 h-2.5 bg-green-500 rounded-full" />
+            </div>
+
+            <span className="text-[10px] tracking-[0.4em] text-zinc-500">
+              INSTALL
+            </span>
+
+            <span className="text-[10px] text-[#c8b08a]">
+              READY
+            </span>
+          </div>
+
+          {/* TERMINAL CODE */}
+          <div className="relative p-8 font-mono text-[13px] leading-7">
+
+            <div className="text-zinc-500 mb-3">
+              // embed before closing body tag
+            </div>
+
+            <pre className="
+              text-[#e8d2a8]
+              whitespace-pre-wrap
+              break-words
+            ">
+{embedCode}
+            </pre>
+
+            {/* COPY BTN */}
+            <button
+              onClick={handleCopy}
+              disabled={copied}
+              className="
+                absolute top-6 right-6
+                px-4 py-1.5 rounded-md
+                text-[11px] font-semibold
+                bg-[#141414]
+                border border-[#c8b08a]/40
+                text-[#c8b08a]
+                hover:bg-[#1d1d1d]
+                transition
+              "
+            >
+              {copied ? "Copied" : "Copy"}
+            </button>
+          </div>
+        </div>
+
+        <p className="text-[11px] text-zinc-600 mt-4 text-center">
+          Lightweight • No Dependencies • Instant Load
+        </p>
+      </div>
     </div>
-
-    <ol className="space-y-2 text-sm text-zinc-400 list-decimal list-inside">
-      <li>Copy the embed script</li>
-      <li>Paste before body closing tag</li>
-      <li>Reload your website</li>
-    </ol>
   </motion.div>
 </div>
+
+
+
+
+
+
 {/* ====  LIVE PREVIEW  ====== */}
 
 <div className="flex justify-center px-4 pb-24 mt-10">
