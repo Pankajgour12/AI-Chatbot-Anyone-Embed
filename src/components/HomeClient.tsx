@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { motion } from "motion/react";
 import {
@@ -12,7 +12,11 @@ import {
 } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 const HomeClient = ({ email }: { email: string }) => {
+
+  const navigate = useRouter()
+  const [loading, setLoading] = useState(false) 
   const handleLogin = () => {
+    setLoading(true)
     window.location.href = "/api/auth/login";
   };
   const features = [
@@ -33,8 +37,7 @@ const HomeClient = ({ email }: { email: string }) => {
     },
   ];
 
-  const navigate = useRouter()
-
+  
   return (
     <div className="min-h-screen w-full relative z-10 overflow-hidden">
       <div

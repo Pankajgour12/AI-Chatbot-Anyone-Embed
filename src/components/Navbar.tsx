@@ -11,7 +11,7 @@ export default function Navbar({ email }: { email: string }) {
   const firstLetter = email?.charAt(0).toUpperCase()
   const [open, setOpen] = useState(false)
   const popupRef = useRef<HTMLDivElement>(null)
-
+  const [loading, setLoading] = useState(false) 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (popupRef.current && !popupRef.current.contains(e.target as Node))
@@ -22,6 +22,7 @@ export default function Navbar({ email }: { email: string }) {
   }, [])
 
   const handleLogin = async() => {
+    setLoading(true)
     window.location.href = "/api/auth/login"
     
      
@@ -123,6 +124,7 @@ const navigate = useRouter()
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleLogin}
+              disabled={loading}
               className="group relative px-6 py-2 rounded-lg
                 text-white font-semibold border border-white/20 overflow-hidden"
             >
@@ -136,7 +138,7 @@ const navigate = useRouter()
                 group-hover:opacity-100 transition duration-500
                 bg-gradient-to-r from-amber-400/30 to-orange-500/30" />
 
-              <span className="relative z-10">Login</span>
+              <span className="relative z-10">{loading?"Loading...":"Login"}</span>
             </motion.button>
           )}
         </div>
