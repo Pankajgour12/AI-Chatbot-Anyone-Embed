@@ -9,7 +9,7 @@ export default async function Home() {
   return (
     <>
     
-    <HomeClient email={session?.user?.email}/>
+<HomeClient email={session?.user?.email ?? ""} />
       <Toaster position="top-right" theme="dark" richColors />
     </>
   );
