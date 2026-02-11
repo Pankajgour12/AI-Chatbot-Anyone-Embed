@@ -13,6 +13,7 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
   const [knowledge, setKnowledge] = useState("");
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [canEmbed, setCanEmbed] = useState(false);
 
   const handleSave = async () => {
     setLoading(true);
@@ -23,16 +24,16 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
         supportEmail,
         knowledge,
       });
-      console.log(result.data);
+      
       setLoading(false);
       setSaved(true);
+      setCanEmbed(true);
+
       setTimeout(() => {
         setSaved(false);
       }, 3000);
 
-      setBusinessName("");
-      setSupportEmail("");
-      setKnowledge("");
+      
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -49,11 +50,17 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
           const result = await axios.post("/api/settings/get", {
             ownerId,
           });
-         console.log(result.data);
+ 
           setBusinessName(result.data.businessName);
           setSupportEmail(result.data.supportEmail);
           setKnowledge(result.data.knowledge);
          
+            if (result.data.businessName && result.data.supportEmail && result.data.knowledge) {
+      setCanEmbed(true);
+    }
+
+
+
         } catch (error) {
           console.log(error);
     
@@ -96,41 +103,57 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
             </motion.div>
 
             {/* RIGHT */}
-
-            <motion.button
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.96 }}
-              className="
+              <motion.button
+  whileHover={canEmbed ? { y: -1.5 } : {}}
+  whileTap={canEmbed ? { scale: 0.97 } : {}}
+  disabled={!canEmbed}
+  onClick={() => canEmbed && navigate.push("/embed")}
+  className={`
     group relative px-7 py-2.5 rounded-xl
-    bg-zinc-900/80 backdrop-blur-md
-    border border-white/15
-    text-white font-semibold tracking-wide
-    shadow-[0_8px_30px_rgba(0,0,0,0.5)]
-    overflow-hidden
-  "
-  onClick={()=>navigate.push('/embed')}
-            >
-              
-              <span
-                className="
+    backdrop-blur-xl border font-semibold tracking-wide
+    shadow-[0_8px_30px_rgba(0,0,0,0.55)]
+    overflow-hidden transition-all duration-300
+    ${
+      canEmbed
+        ? "bg-gradient-to-b from-[#1c1c22] to-[#0f0f14] border-white/15 text-white cursor-pointer hover:border-white/30"
+        : "bg-gradient-to-b from-[#141418] to-[#0b0b0f] border-white/5 text-zinc-500 cursor-not-allowed"
+    }
+  `}
+>
+ 
+  <span
+    className="
       absolute inset-0 opacity-0 group-hover:opacity-100
-      bg-gradient-to-r from-transparent via-white/10 to-transparent
-      transition duration-500
+      bg-gradient-to-b from-white/10 to-transparent
+      transition duration-300
     "
-              />
+  />
 
-           
-              <span
-                className="
+  
+  <span
+    className="
       absolute bottom-0 left-1/2 -translate-x-1/2
       w-0 h-[2px]
-      bg-gradient-to-r from-transparent via-amber-400 to-transparent
+      bg-gradient-to-r from-transparent via-white/40 to-transparent
       group-hover:w-3/4 transition-all duration-500
     "
-              />
+  />
 
-              <span className="relative z-10">Embed AI Chat</span>
-            </motion.button>
+ 
+  {canEmbed && (
+    <span
+      className="
+        absolute -inset-[1px] rounded-xl blur opacity-0 group-hover:opacity-40
+        bg-white/20 transition duration-500 -z-10
+      "
+    />
+  )}
+
+  <span className="relative z-10">Embed AI Chat</span>
+</motion.button>
+ 
+
+            
           </div>
 
           <div
@@ -140,186 +163,249 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
         </div>
       </motion.nav>
 
-      <div className="relative flex justify-center px-4 py-24 mt-10">
+     
 
- 
-  <div className="absolute w-[500px] h-[300px] bg-amber-500/8 blur-[200px] rounded-full pointer-events-none" />
+    
+
+<div className="relative flex justify-center px-4 py-24 mt-6">
+
+
+  <div className="absolute -top-28 w-[800px] h-[380px]
+    bg-gradient-to-r from-yellow-400/10 via-amber-300/10 to-yellow-500/10
+    blur-[200px] rounded-full pointer-events-none" />
 
   <motion.div
-    initial={{ opacity: 0, y: 30 }}
+    initial={{ opacity: 0, y: 35 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
+    transition={{ duration: 0.6 }}
     className="
-      relative w-full max-w-4xl
-      bg-[#0b0b0d]
+      relative w-full max-w-6xl
+      rounded-[30px]
       border border-white/10
-      rounded-2xl
-      shadow-[0_40px_140px_rgba(0,0,0,0.9)]
-      overflow-hidden
+      bg-gradient-to-b from-[#0c0c12] to-[#060608]
+      shadow-[0_80px_260px_rgba(0,0,0,0.95),0_0_60px_rgba(255,215,0,0.08)]
+      overflow-hidden text-white
     "
   >
 
     {/* TOP  */}
-    <div className="flex items-center justify-between px-8 py-5 border-b border-white/10 bg-black/70">
-
-      <div className="flex items-center gap-3">
-        <span className="w-3 h-3 bg-red-500 rounded-full" />
-        <span className="w-3 h-3 bg-yellow-400 rounded-full" />
-        <span className="w-3 h-3 bg-emerald-400 rounded-full" />
+    <div className="flex items-center justify-between px-8 py-5 border-b border-white/10 bg-black/50 backdrop-blur-xl">
+      <div className="flex gap-2">
+        <span className="w-3 h-3 bg-red-600 rounded-full" />
+        <span className="w-3 h-3 bg-yellow-500 rounded-full" />
+        <span className="w-3 h-3 bg-emerald-500 rounded-full" />
       </div>
 
-      <span className="text-[11px] font-mono tracking-[0.25em] text-gray-500">
-        SUPPORT_AI.CONSOLE
+      <span className="text-[11px] tracking-[0.35em] text-zinc-500 font-semibold">
+        AI CONTROL CENTER
       </span>
 
-      <span className="px-2 py-[2px] text-[10px]
-        border border-emerald-400/40
-        text-emerald-400 rounded
-        shadow-[0_0_12px_rgba(16,185,129,0.3)]">
-        ONLINE
+      <span className="px-3 py-[3px] text-[10px] gold-border rounded-md font-semibold tracking-widest">
+        ACTIVE
       </span>
     </div>
 
     
-    <div className="p-12 space-y-14">
+    <div className="grid md:grid-cols-2 gap-14 p-12 max-md:p-7">
 
-      {/* BUSINESS */}
-      <div>
-        <h3 className="
-          text-xs font-semibold tracking-[0.25em]
-          bg-gradient-to-r from-gray-400 to-gray-600
-          bg-clip-text text-transparent mb-6
+      {/* LEFT PANEL */}
+      <div className="space-y-6">
+
+        <h1 className="text-4xl font-semibold leading-tight gold-text">
+          Configure Your <span className="
+  text-4xl font-semibold leading-tight
+  bg-gradient-to-r from-white via-zinc-300 to-slate-400
+  bg-clip-text text-transparent
+">
+   AI Assistant
+</span>
+        </h1>
+          
+           
+
+        <p className="text-zinc-400 text-sm leading-relaxed max-w-md">
+          Control how your chatbot behaves across every website.
+          Define identity, support details, and knowledge so
+          responses stay accurate and on-brand.
+        </p>
+
+        <div className="space-y-2 text-sm text-zinc-500">
+          <p>• Brand tone customization</p>
+          <p>• Faster automated responses</p>
+          <p>• Centralized AI control</p>
+        </div>
+
+        <div className="
+          mt-6 px-5 py-4 rounded-xl
+          bg-white/5 border border-white/10
+          text-zinc-400 text-xs
         ">
-          BUSINESS DETAILS
-        </h3>
-
-        <div className="space-y-6">
-          <input
-            type="text"
-            placeholder="Business Name"
-            value={businessName}
-            onChange={(e)=>setBusinessName(e.target.value)}
-            className="
-              w-full bg-[#111113]
-              border border-white/10
-              rounded-lg px-5 py-3
-              text-sm text-white
-              focus:border-amber-400/40
-              focus:ring-1 focus:ring-amber-400/30
-              outline-none
-              placeholder:text-gray-600
-            "
-          />
-
-          <input
-            type="text"
-            placeholder="Support Email"
-            value={supportEmail}
-            onChange={(e)=>setSupportEmail(e.target.value)}
-            className="
-              w-full bg-[#111113]
-              border border-white/10
-              rounded-lg px-5 py-3
-              text-sm text-white
-              focus:border-amber-400/40
-              focus:ring-1 focus:ring-amber-400/30
-              outline-none
-              placeholder:text-gray-600
-            "
-          />
+          Changes apply instantly to all embedded chatbots.
         </div>
       </div>
 
-     
-      <div className="h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+      {/* RIGHT FORM */}
+      <div className="space-y-9">
 
-      {/* KNOWLEDGE */}
-      <div>
-        <h3 className="
-          text-xs font-semibold tracking-[0.25em]
-          bg-gradient-to-r from-gray-400 to-gray-600
-          bg-clip-text text-transparent mb-6
-        ">
-          KNOWLEDGE BASE
-        </h3>
+        {/* BUSINESS */}
+        <div>
+          <h3 className="text-[11px] tracking-[0.3em] mb-5 gold-text font-semibold">
+            BUSINESS DETAILS
+          </h3>
 
-        <textarea
-          value={knowledge}
-          onChange={(e)=>setKnowledge(e.target.value)}
-          placeholder="Refund Policy, Delivery Info..."
-          className="
-            w-full h-40 resize-none
-            bg-[#111113]
-            border border-white/10
-            rounded-lg px-5 py-4
-            text-sm text-white
-            focus:border-amber-400/40
-            focus:ring-1 focus:ring-amber-400/30
-            outline-none
-            placeholder:text-gray-600
-          "
-        />
-      </div>
+          <div className="space-y-4">
+            <input
+              type="text"
+              placeholder="Business Name"
+              value={businessName}
+              onChange={(e)=>setBusinessName(e.target.value)}
+              className="
+                w-full bg-[#121216]
+                border border-white/10
+                rounded-xl px-5 py-3 text-sm
+                focus:border-yellow-400/40
+                focus:ring-2 focus:ring-yellow-400/10
+                outline-none transition
+              "
+            />
 
-      {/* ACTION */}
-      <div className="flex items-center justify-between">
+            <input
+              type="text"
+              placeholder="Support Email"
+              value={supportEmail}
+              onChange={(e)=>setSupportEmail(e.target.value)}
+              className="
+                w-full bg-[#121216]
+                border border-white/10
+                rounded-xl px-5 py-3 text-sm
+                focus:border-yellow-400/40
+                focus:ring-2 focus:ring-yellow-400/10
+                outline-none transition
+              "
+            />
+          </div>
+        </div>
 
-        <motion.button
-  whileHover={{ y: -2 }}
-  whileTap={{ scale: 0.97 }}
-  disabled={loading}
-  onClick={handleSave}
-  className="
-    group relative px-9 py-3 rounded-xl
-    bg-white/[0.06] backdrop-blur-xl
-    border border-white/15
-    text-white font-semibold text-sm tracking-wide
-    shadow-[0_8px_30px_rgba(0,0,0,0.6)]
-    overflow-hidden
-    disabled:opacity-60
-  "
->
+        {/* KNOWLEDGE */}
+        <div>
+          <h3 className="text-[11px] tracking-[0.3em] mb-5 gold-text font-semibold">
+            KNOWLEDGE BASE
+          </h3>
 
-  {/* subtle inner light */}
-  <span
+          <textarea
+            value={knowledge}
+            onChange={(e)=>setKnowledge(e.target.value)}
+            placeholder="Refund policy, delivery time, FAQs..."
+            className="
+              w-full h-36 resize-none
+              bg-[#121216]
+              border border-white/10
+              rounded-xl px-5 py-4 text-sm
+              focus:border-yellow-400/40
+              focus:ring-2 focus:ring-yellow-400/10
+              outline-none transition
+            "
+          />
+        </div>
+
+        <div className="flex flex-wrap items-center gap-5">
+
+  
+  <motion.button
+    whileHover={{ y: -2, scale: 1.02 }}
+    whileTap={{ scale: 0.97 }}
+    disabled={loading}
+    onClick={handleSave}
+    className={`
+      group relative px-9 py-3.5 rounded-xl
+      backdrop-blur-xl border
+      font-semibold text-sm tracking-wide
+      shadow-[0_10px_40px_rgba(0,0,0,0.6)]
+      overflow-hidden transition
+      ${loading 
+        ? "bg-zinc-800/40 border-white/10 text-zinc-500 cursor-not-allowed" 
+        : "bg-white/[0.06] border-white/20 text-white"}
+    `}
+  >
+    
+    <span className="
+      absolute inset-0 opacity-0 group-hover:opacity-100
+      bg-gradient-to-b from-white/20 to-transparent
+      transition duration-300
+    "/>
+
+    <span className="relative z-10">
+      {loading ? "Saving..." : "Apply Changes"}
+    </span>
+  </motion.button>
+
+
+  
+  {saved && (
+    <span className="text-emerald-400 text-xs tracking-widest">
+      ✓ UPDATED
+    </span>
+  )}
+
+
+  
+ {canEmbed && (
+  <motion.button
+    initial={{ opacity: 0, y: 8 }}
+    animate={{ opacity: 1, y: 0 }}
+    whileHover={{ y: -1, scale: 1.015 }}
+    whileTap={{ scale: 0.98 }}
+    onClick={() => navigate.push("/embed")}
     className="
+      group relative px-9 py-3.5 rounded-xl
+      font-semibold text-sm tracking-wide text-white
+      bg-gradient-to-b from-[#1f1f25] to-[#0e0e12]
+      border border-white/15
+      shadow-[0_8px_30px_rgba(0,0,0,0.6)]
+      overflow-hidden transition
+    "
+  >
+    {/* subtle hover light */}
+    <span className="
       absolute inset-0 opacity-0 group-hover:opacity-100
       bg-gradient-to-b from-white/10 to-transparent
-      transition duration-400
-    "
-  />
+      transition duration-300
+    "/>
 
-  {/* bottom accent line */}
-  <span
-    className="
+    {/* bottom accent line */}
+    <span className="
       absolute bottom-0 left-1/2 -translate-x-1/2
       w-0 h-[2px]
-      bg-gradient-to-r from-transparent via-white/60 to-transparent
+      bg-gradient-to-r from-transparent via-white/40 to-transparent
       group-hover:w-3/4 transition-all duration-500
-    "
-  />
+    "/>
 
-  <span className="relative z-10">
-    {loading ? "Saving..." : "Apply Changes"}
-  </span>
-</motion.button>
+    <span className="relative z-10">
+      Embed Code →
+    </span>
+  </motion.button>
+)}
 
 
-        {saved && (
-          <span className="text-emerald-400 text-xs tracking-wide font-mono">
-            ✓ CONFIG SAVED
-          </span>
-        )}
+
+</div>
+
 
       </div>
     </div>
 
-   
+
     <div className="absolute bottom-0 inset-x-0 h-[2px]
-      bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />
+      bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent" />
 
   </motion.div>
-     </div>
+</div>
+
+
+
+
+
+
 
 
 

@@ -311,43 +311,77 @@ const HomeClient = ({ email }: { email: string }) => {
           </div>
         </section>
 
-        
-        <section className="relative py-8 px-6 border-t border-white/5">
-          <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-4xl font-semibold text-white">How It Works</h2>
+       
 
-            <div className="mt-20 grid md:grid-cols-3 gap-14">
-              {[
-                "Add your website data",
-                "Train the AI model",
-                "Go live instantly",
-              ].map((t, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.15 }}
-                  className="relative group"
-                >
-                  <div className="w-16 h-16 mx-auto rounded-full bg-amber-400/20 border border-amber-300/20 flex items-center justify-center text-2xl text-amber-300">
-                    {i + 1}
-                  </div>
+<section className="relative py-28 px-6 border-t border-white/10 overflow-hidden">
+  {/* ambient glow */}
+  <div className="absolute inset-0 pointer-events-none">
+    <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-amber-500/5 blur-3xl rounded-full" />
+  </div>
 
-                  <h3 className="mt-6 text-lg text-white font-semibold">{t}</h3>
+  <div className="relative max-w-7xl mx-auto text-center">
+    <h2 className="text-5xl md:text-6xl font-semibold tracking-tight bg-gradient-to-r from-amber-300 via-white to-purple-400 bg-clip-text text-transparent">
+     Launch Your AI Chatbot in Minutes
+    </h2>
 
-                  <p className="text-gray-400 mt-2 text-sm">
-                    Simple 3 step setup. No complex coding required.
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+    <p className="mt-6 text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+      No coding. No complexity. Just a simple 3-step workflow to get your smart assistant live on any website instantly.
+    </p>
+
+    <div className="mt-24 grid md:grid-cols-3 gap-12">
+      {[
+        {
+          title: "Access Your Dashboard",
+          desc: "Sign in and enter your control panel. This is where you configure knowledge, customize behavior, and monitor conversations in real-time.",
+        },
+        {
+          title: "Generate Embed Script",
+          desc: "Use the Embed action in the top-right corner to instantly produce your unique integration snippet tailored to your workspace.",
+        },
+        {
+          title: "Deploy to Your Website",
+          desc: "Insert the generated script just before the closing body tag of your website. Your assistant becomes instantly available to visitors.",
+        },
+      ].map((step, i) => (
+        <div
+          key={i}
+          className="group relative bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-12 text-left hover:border-amber-400/40 transition duration-500"
+        >
+          {/* step number */}
+          <div className="absolute -top-6 left-10 w-14 h-14 rounded-full bg-black border border-amber-400/40 text-amber-300 font-semibold text-lg flex items-center justify-center shadow-xl">
+            0{i + 1}
           </div>
-        </section>
+
+          <h3 className="text-2xl font-medium text-white mt-4">
+            {step.title}
+          </h3>
+
+          <p className="text-gray-400 mt-4 leading-relaxed text-[15px]">
+            {step.desc}
+          </p>
+
+          {/* subtle hover gradient */}
+          <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-amber-400/5 via-transparent to-transparent" />
+        </div>
+      ))}
+    </div>
+
+    <p className="text-gray-500 mt-16 text-sm tracking-wide">
+      Compatible with modern frameworks and traditional websites alike.
+    </p>
+  </div>
+</section>
+
+
+
+
+
+        
 
 
         {/* Footer */}
 
-        <footer className="relative mt-40 border-t border-white/10">
+        <footer className="relative mt-10 border-t border-white/10">
           <div
             className="absolute inset-0 -z-10 opacity-40
     bg-[radial-gradient(circle_at_top,#1f1f1f,transparent_70%)]"
