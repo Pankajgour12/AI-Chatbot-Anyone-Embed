@@ -182,3 +182,20 @@
 }
 
 
+
+
+* {
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+html {
+  height: auto;
+}
+
+body {
+  height: auto;
+  overflow-x: hidden;
+  scroll-behavior: auto;
+}
