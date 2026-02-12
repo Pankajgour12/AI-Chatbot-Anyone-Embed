@@ -14,7 +14,7 @@ const EmbedClient = ({ ownerId }: { ownerId: string }) => {
 
   const embedCode = `
         <script src="${process.env.NEXT_PUBLIC_APP_URL}
-          /chatBot.js"data-ownerId="${ownerId}">
+      1    /chatBot.js"data-ownerId="${ownerId}">
         </script>
     `;
   const handleCopy = () => {
